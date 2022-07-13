@@ -2,8 +2,8 @@
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 </script>
 
@@ -11,7 +11,7 @@ defineProps({
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-Hold on to your butts, we're going to play a game!
+      Let's play a game!
     </h3>
   </div>
 </template>
