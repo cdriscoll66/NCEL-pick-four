@@ -16,7 +16,7 @@ const state = reactive({
           id: 1,
           title: 'Video One',
           video: '/video/01.mp4',
-          length: 26.639,
+          length: 7.034,
           marker: 0,
         },
         {
@@ -56,7 +56,7 @@ const state = reactive({
           id: 6,
           title: 'Video six',
           video: '/video/06.mp4',
-          length: 7.034,
+          length: 26.639,
           marker: 0,
         },
       ],
