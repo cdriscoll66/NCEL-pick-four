@@ -114,8 +114,8 @@ const prevVideo = () => {
     console.log('nothin.')
     return
   } else if (state.video - 1 < 0) {
-    state.video = state.tuts[state.subject].videos.length - 1
     state.subject--
+    state.video = state.tuts[state.subject].videos.length - 1;
     state.playing = true
   } else {
     state.video--
