@@ -2,6 +2,7 @@
 import { ref, onUpdated } from 'vue';
 
 
+const emit = defineEmits(['update-time'])
 const props = defineProps(['onscreen', 'playing']);
 
 const vid = ref(null);
@@ -18,15 +19,17 @@ onUpdated(() => {
 
 
 const spitOut = () => {
-console.log(vid._value.currentTime);
-// emit the current time to update the parent component (Tutorial)
+    if (vid._value) {
+        let timeNow = vid._value.currentTime;
+        emit('update-time', timeNow);
 
+    };
 }
 
 </script>
 
 <template>
-    <video id="vid" ref="vid" width="640" height="480" autoplay muted @timeupdate='spitOut'>
+    <video id="vid" ref="vid" width="640" height="480" autoplay muted @timeupdate='spitOut()'>
       <source :src='props.onscreen' type="video/mp4">
     Your browser does not support the video tag.
     </video>
