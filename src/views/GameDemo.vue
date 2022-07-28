@@ -26,7 +26,7 @@ const genWinners = () => {
 const checkAnyNumbers = () => {
  picks.map((num) => {
    if (winners.includes(num)) {
-    alert(`${winners} <br />you win`);
+   
    }
    })
  };
