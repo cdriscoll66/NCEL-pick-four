@@ -1,11 +1,20 @@
 @import "./base.css";
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+    background: var(--color-background);
+    top: 50%;
+    left: 50%;
+    width: 375px;
+    height: 635px;
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(var(--viewport-scale));
+}
 
-  font-weight: normal;
+main {
+  position: relative;
+  padding-top: 60px;
+  height: 100%; /* guesstimated height of remaining screen outside header - redo when get actual size. */
+  width: 100%;
 }
 
 a,
@@ -21,15 +30,3 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-  }
-
-  #app {
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start;
-    padding: 0 2rem;
-  }
-}

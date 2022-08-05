@@ -1,6 +1,9 @@
 <script setup>
 import { reactive } from 'vue'
-
+import PlayBtn from '../assets/play.svg'
+import PauseBtn from '../assets/pause.svg'
+import FwdBtn from '../assets/arrow-square-right.svg'
+import BackBtn from '../assets/arrow-square-left.svg'
 import VideoPlayer from '../components/VideoPlayer.vue'
 import ProgressBar from '../components/ProgressBar.vue'
 
@@ -16,21 +19,21 @@ const state = reactive({
           id: 1,
           title: 'Video One',
           video: '/video/01.mp4',
-          length: 7.034,
+          length: 13,
           marker: 0,
         },
         {
           id: 2,
           title: 'Video two',
           video: '/video/02.mp4',
-          length: 11.8,
+          length: 9,
           marker: 0,
         },
         {
           id: 3,
           title: 'Video three',
           video: '/video/03.mp4',
-          length: 15.431,
+          length: 9,
           marker: 0,
         },
       ],
@@ -42,21 +45,21 @@ const state = reactive({
           id: 4,
           title: 'Video four',
           video: '/video/04.mp4',
-          length: 10.487,
+          length: 11,
           marker: 0,
         },
         {
           id: 5,
           title: 'Video five',
           video: '/video/05.mp4',
-          length: 10.367,
+          length: 12,
           marker: 0,
         },
         {
           id: 6,
           title: 'Video six',
           video: '/video/06.mp4',
-          length: 26.639,
+          length: 9,
           marker: 0,
         },
       ],
@@ -77,7 +80,7 @@ const state = reactive({
           video: '/video/08.mp4',
           length: 212.56,
           marker: 0,
-        }
+        },
       ],
     },
   ],
@@ -105,8 +108,9 @@ const handleEnd = () => {
 }
 
 const UpdateTime = (timer) => {
-  let timerPercent = (timer / state.tuts[state.subject].videos[state.video].length) * 100;
-   state.tuts[state.subject].videos[state.video].marker = timerPercent
+  let timerPercent =
+    (timer / state.tuts[state.subject].videos[state.video].length) * 100
+  state.tuts[state.subject].videos[state.video].marker = timerPercent
 }
 
 const prevVideo = () => {
@@ -115,7 +119,7 @@ const prevVideo = () => {
     return
   } else if (state.video - 1 < 0) {
     state.subject--
-    state.video = state.tuts[state.subject].videos.length - 1;
+    state.video = state.tuts[state.subject].videos.length - 1
     state.playing = true
   } else {
     state.video--
@@ -130,10 +134,12 @@ const Playpause = () => {
 
 <template>
   <main>
-    <div>
+    <div class="progress-bar">
       <h1>{{ state.tuts[state.subject].subject }}</h1>
-      <h3>{{ state.tuts[state.subject].videos[state.video].title }}</h3>
-      <ProgressBar :tuts="state.tuts[state.subject]" :key="state.subject"/>
+      <ProgressBar
+        :tuts="state.tuts[state.subject]"
+        :key="state.subject"
+      ></ProgressBar>
       <VideoPlayer
         :onscreen="state.tuts[state.subject].videos[state.video].video"
         :playing="state.playing"
@@ -142,12 +148,53 @@ const Playpause = () => {
         @update-time="UpdateTime"
       />
     </div>
-
-    <button @click="prevVideo">Previous Video</button>
-
-    <button v-if="state.playing" @click="Playpause">Pause</button>
-    <button v-else @click="Playpause">Play</button>
-
-    <button @click="nextVideo">Next Video</button>
+    <div class="video-controls">
+      <a href @click.prevent="prevVideo">
+        <img width="26" height="26" alt="Back Icon" :src="BackBtn" />
+        <span>Previous</span>
+      </a>
+      <a href v-if="state.playing" @click.prevent="Playpause">
+      <img width="26" height="26" alt="Pause Icon" :src="PauseBtn" />
+      <span>Pause</span></a>
+      <a href v-else @click.prevent="Playpause">      
+      <img width="26" height="26" alt="Play Icon" :src="PlayBtn" />
+<span>Play</span></a>
+      <a href @click.prevent="nextVideo">      
+      <img width="26" height="26" alt="Foward Icon" :src="FwdBtn" />
+<span>Next</span></a>
+    </div>
   </main>
 </template>
+
+<style scoped>
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.video-controls a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+  transition: background-color 0.2s ease-in-out;
+  color: var(--vt-c-white);
+}
+.progress-bar {
+  background-color: var(--color-green-darkest);
+}
+
+h1 {
+  font-size: 1rem;
+  color: var(--vt-c-white);
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0.5rem;
+}
+</style>

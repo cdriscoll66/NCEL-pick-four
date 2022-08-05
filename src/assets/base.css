@@ -4,15 +4,20 @@
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
 
-  --color-green: #00b300;
-  --color-green-dark: #009900;
+  --color-green: #007A3D;
+  --color-green-dark: #009C4A;
+  --color-green-light: #33B06E;
+  --color-green-darkest: #003D1F;
+  --color-green-accent: #0BCE65;
+  --color-gold: #FFD206;
+  --color-fireball-red: #CD2B2B;
 
   --vt-c-black: #181818;
   --vt-c-black-soft: #222222;
   --vt-c-black-mute: #282828;
 
   --vt-c-indigo: #2c3e50;
-
+  
 
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
@@ -64,15 +69,13 @@
 }
 
 body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow:hidden;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color:var(--vt-c-black);
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
