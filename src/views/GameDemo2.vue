@@ -1,54 +1,60 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import BgStars from '../components/BgStars.vue';
+
+const emit = defineEmits(['music']);
 
 const state = reactive({
+  eighteenModal: true,
+  instructions: 'pick four numbers!',
   gamesplayed: 0,
   picks: [null, null, null, null],
-  winners: [],
+  fireball: null,
   selectNum: (num, slot) => {
     state.picks[slot] = num
   },
+  closeModal: () => {
+    state.eighteenModal = false
+  }
+
 })
 
-const playAgain = () => {
-  state.picks = [null, null, null, null];
-  state.winners = [];
-}
 
 const playNumbers = () => {
-  genWinners()
-  checkFirstNumbers()
+  emit('music', 'audio/FunkyInFunky.mp3');
+  genFireball()
   state.gamesplayed++
+
+    // Modal for success fires here
+
 }
 
-const genWinners = () => {
-  state.winners = []
-  state.winners.push(state.picks[0], state.picks[1], state.picks[2])
+const genFireball = () => {
   let num = Math.floor(Math.random() * 10) + 1
-  if (state.winners.includes(num)) {
+  if (state.picks.includes(num)) {
     genWinners()
   } else {
-    state.winners.push(num)
+    state.fireball = num;
   }
 }
 
-const checkFirstNumbers = () => {
-  alert(
-    'The fire-ball was ' +
-      state.winners[3] +
-      '! So congrats to you! You won $100! \n Your Numbers: ' +
-      state.picks.join(', ') +
-      ' \n Winners with fireball: ' +
-      state.winners.join(', '),
-  )
-}
+
 </script>
 
 <template>
   <main>
+  <div v-show="(state.eighteenModal)" class="eighteen">
+    <h2>Are you over 18?</h2>
+    <div class="eighteen-buttons">
+      <a href @click.prevent="state.closeModal">Yes</a>
+      <a href="https://www.yahoo.com" target="_blank">No</a>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+
+  </div>
+  <h2>{{state.instructions}}</h2>
     <div class="picks">
       <div class="pick" v-for="(pick, i) in state.picks">
-        <h3 class="number">{{ i }}</h3>
         <div class="select-num">
           <div v-for="index in 10" :key="index">
             <button
@@ -73,25 +79,29 @@ const checkFirstNumbers = () => {
         </div>
       </div>
     </div>
+    
     <div class="bottom">
-      <div class="selection">
-        {{ state.picks.join(', ') }}
-      </div>
-
       <div class="winners">
         <button @click.prevent="playNumbers()">Play!</button>
-        <div v-show="state.gamesplayed">
-          <p>{{ state.picks.join(', ') }}</p>
-          <button @click.prevent="playAgain()">Play Again</button>
-        </div>
       </div>
     </div>
+
+
+    <BgStars green="true"/>
   </main>
 </template>
 
 <style scoped>
-h3.number {
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--vt-c-white);
   text-align: center;
+  margin-top: 40px;
+}
+.picks {
+  margin-top: 30px;
 }
 
 .select-num {
@@ -99,9 +109,23 @@ h3.number {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 4px;
   margin-bottom: 30px;
 }
 
+.picks button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 button.active {
   background-color: var(--color-green-dark);
   color: var(--color-text);
@@ -116,5 +140,47 @@ button.disabled {
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
+}
+
+.eighteen {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--color-green-darkest);
+  z-index: 1;
+  padding: 50px 30px 0 30px;
+}
+
+.eighteen-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.eighteen-buttons a {
+  color: var(--vt-c-white);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--vt-c-white);
+}
+
+.eighteen p {
+  color: var(--vt-c-white);
+  font-size: .85rem;
+  text-align: center;
 }
 </style>
