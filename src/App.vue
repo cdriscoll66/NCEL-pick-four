@@ -1,12 +1,11 @@
 <script setup>
 import { onBeforeMount, reactive } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HomeIcon from './assets/home.svg'
-import LearnIcon from './assets/menu.svg'
-import PlayIcon from './assets/play.svg'
-import PauseIcon from './assets/pause.svg'
-import MuteIcon from './assets/sound.svg'
-import CloseIcon from './assets/close.svg'
+import HomeIcon from './assets/home.png'
+import LearnIcon from './assets/menu.png'
+import PlayIcon from './assets/play.png'
+import MuteIcon from './assets/sound.png'
+import CloseIcon from './assets/close.png'
 
 // this resizes the screen to whatever screen it's on.
 onBeforeMount(() => {
@@ -26,30 +25,50 @@ onBeforeMount(() => {
   window.addEventListener('resize', viewportDimensions)
   viewportDimensions()
 
-  // preloadAudio();
+  // preloadImages();
 })
 
-//  const preloadAudio = () => {
-//     // for (let i = 0; i < this.preloadaudioURLs.length; i++) {
-//       const bgMusic = new Audio();
-//       bgMusic.src = state.music;
-//     // }
-//   }
+ const preloadImages = () => {
+   const pics = state.preloadImages;
+      pics.forEach(pic => {
+        const img = new Image();
+        img.src = pic;
+      })
+    }
 
 const state = reactive({
-  music: '/audio/3FunkShortVersion.mp3',
+  music: '',
+  preloadImages: [
+    '/assets/bg-stars.svg',
+    '/assets/bg-stars--green.svg',
+    '/assets/home.png',
+    '/assets/menu.png',
+    '/assets/play.png',
+    '/assets/sound.png',
+    '/assets/close.png'
+  ]
 })
 
 const muteToggle = () => {
-  return bgMusic.paused ? bgMusic.play() : bgMusic.pause()
+  bgMusic.muted = !bgMusic.muted;
 }
 
-const bgMusic = new Audio()
+const playToggle = (status) => {
+  return status ? bgMusic.play() : bgMusic.pause()
+}
+
+let bgMusic = new Audio()
 bgMusic.src = state.music
 bgMusic.loop = true
 
 const exit = () => {
   console.log('exit')
+}
+
+const Music = (song) => {
+  state.music = song
+  bgMusic.src = state.music
+  bgMusic.play()
 }
 </script>
 
@@ -93,12 +112,12 @@ const exit = () => {
     </div>
   </header>
 
-  <RouterView />
+  <RouterView @music="Music" @musicplaypause="playToggle" />
 </template>
 
 <style scoped>
 header {
-  position: absolute; 
+  position: absolute;
   z-index: 10000000;
   top: 0;
   left: 0;
@@ -108,7 +127,6 @@ header {
   max-height: 100vh;
   background-color: #00893a;
   padding: 0;
-
 }
 
 .logo {
