@@ -22,7 +22,6 @@ const spitOut = () => {
     if (vid._value) {
         let timeNow = vid._value.currentTime;
         emit('update-time', timeNow);
-
     };
 }
 
@@ -38,7 +37,7 @@ const spitOut = () => {
 <style scoped>
 #vid {position: absolute;
 z-index: -1;
-top: -104px;
+top: -40px;
 left: 0;
 width: 100%;
 background-color: var(--color-green-darkest);

@@ -26,7 +26,7 @@ const props = defineProps(['tuts'])
   gap: 15px;
   width: 100%;
   justify-content: space-around;
-  padding: 10px;
+  padding: 0 10px;
   position: absolute;
   z-index: 99999;
   background-color: var(--color-green-darkest);
@@ -34,7 +34,7 @@ const props = defineProps(['tuts'])
 
 .progress-bar {
   width: 100%;
-  height: 15px;
+  height: 4px;
   background-color: #809e8f;
   border-radius: 10px;
 }
