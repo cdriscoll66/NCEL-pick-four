@@ -125,7 +125,8 @@ header {
   height: 60px;
   line-height: 1.5;
   max-height: 100vh;
-  background-color: #00893a;
+  background: radial-gradient(442.3% 86.73% at 50% 0%, rgba(0, 156, 74, 0.3) 0%, rgba(0, 122, 61, 0.3) 100%), #009C4A;
+  background-blend-mode: multiply, normal;
   padding: 0;
 }
 
