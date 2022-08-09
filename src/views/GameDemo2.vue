@@ -1,11 +1,13 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import BgStars from '../components/BgStars.vue';
+import PlayResults from '../components/PlayResults.vue';
 
 const emit = defineEmits(['music']);
 
 const state = reactive({
-  eighteenModal: true,
+  showEighteenModal: true,
+  showResults: false,
   instructions: 'pick four numbers!',
   gamesplayed: 0,
   picks: [null, null, null, null],
@@ -14,25 +16,25 @@ const state = reactive({
     state.picks[slot] = num
   },
   closeModal: () => {
-    state.eighteenModal = false
-  }
+    state.showEighteenModal = false
+        emit('music', 'audio/FunkyInFunky.mp3');
 
+  }
 })
 
 
+
 const playNumbers = () => {
-  emit('music', 'audio/FunkyInFunky.mp3');
   genFireball()
   state.gamesplayed++
 
-    // Modal for success fires here
-
+  state.showResults = true;
 }
 
 const genFireball = () => {
   let num = Math.floor(Math.random() * 10) + 1
   if (state.picks.includes(num)) {
-    genWinners()
+    genFireball()
   } else {
     state.fireball = num;
   }
@@ -43,7 +45,7 @@ const genFireball = () => {
 
 <template>
   <main>
-  <div v-show="(state.eighteenModal)" class="eighteen">
+  <div v-show="(state.showEighteenModal)" class="eighteen">
     <h2>Are you over 18?</h2>
     <div class="eighteen-buttons">
       <a href @click.prevent="state.closeModal">Yes</a>
@@ -80,13 +82,11 @@ const genFireball = () => {
       </div>
     </div>
     
-    <div class="bottom">
-      <div class="winners">
+    <div v-show="!state.picks.includes(null)" class="bottom">
         <button @click.prevent="playNumbers()">Play!</button>
-      </div>
     </div>
 
-
+    <PlayResults v-show="(state.showResults)" :picks="state.picks" :fireball="state.fireball"></PlayResults>
     <BgStars green="true"/>
   </main>
 </template>
@@ -127,19 +127,19 @@ h2 {
   transition: all 0.2s ease-in-out;
 }
 button.active {
-  background-color: var(--color-green-dark);
-  color: var(--color-text);
+  background-color: var(--color-gold);
+  color: var(--vt-c-black);
 }
 
 button.disabled {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px 10px;
 }
 
 .eighteen {

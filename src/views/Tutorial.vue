@@ -8,7 +8,7 @@ import BackBtn from '../assets/arrow-square-left.svg'
 import VideoPlayer from '../components/VideoPlayer.vue'
 import ProgressBar from '../components/ProgressBar.vue'
 
-const emit = defineEmits(['music', 'musicplaypause']);
+const emit = defineEmits(['music', 'musicplaypause'])
 
 onBeforeMount(() => {
   state.showToc = true
@@ -42,6 +42,27 @@ const state = reactive({
           id: 3,
           title: 'Video three',
           video: '/video/03.mp4',
+          length: 9,
+          marker: 0,
+        },
+        {
+          id: 4,
+          title: 'Video four',
+          video: '/video/04.mp4',
+          length: 11,
+          marker: 0,
+        },
+        {
+          id: 5,
+          title: 'Video five',
+          video: '/video/05.mp4',
+          length: 12,
+          marker: 0,
+        },
+        {
+          id: 6,
+          title: 'Video six',
+          video: '/video/06.mp4',
           length: 9,
           marker: 0,
         },
@@ -110,7 +131,7 @@ const nextVideo = () => {
     state.video++
     state.playing = true
   }
-  emit('musicplaypause', state.playing);
+  emit('musicplaypause', state.playing)
 }
 
 const handleEnd = () => {
@@ -135,12 +156,12 @@ const prevVideo = () => {
     state.video--
     state.playing = true
   }
-  emit('musicplaypause', state.playing);
+  emit('musicplaypause', state.playing)
 }
 
 const Playpause = () => {
   state.playing = !state.playing
-  emit('musicplaypause', state.playing);
+  emit('musicplaypause', state.playing)
 }
 
 const handleToc = (i) => {
@@ -148,7 +169,7 @@ const handleToc = (i) => {
   state.video = 0
   state.playing = true
   state.showToc = false
-  emit('music', '/audio/3FunkShortVersion.mp3');
+  emit('music', '/audio/3FunkShortVersion.mp3')
 }
 </script>
 
