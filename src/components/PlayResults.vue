@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
 import gsap from 'gsap';
-import BgStars from './BGstars.vue';
+import BgStars from './BgStars.vue';
 import Winner from './Winner.vue';
 
 const props = defineProps(['picks', 'fireball']);
