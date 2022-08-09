@@ -2,16 +2,18 @@
   "name": "ncel-pick-3-prototype",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
+    "dev": "vite",
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "pinia": "^2.0.17",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.14"
+    "vite": "^2.9.14",
+    "vue-cli-plugin-pinia": "~0.1.4"
   }
 }
