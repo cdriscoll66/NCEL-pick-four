@@ -1,17 +1,19 @@
 <script setup>
-import { computed } from '@vue/reactivity'
-import BgStars from './BGstars.vue'
+import { computed } from '@vue/reactivity';
+import BgStars from './BGstars.vue';
 
-const props = defineProps(['picks', 'fireball'])
+const props = defineProps(['picks', 'fireball']);
+
+const emit = defineEmits(['next-game']);
 
 const winners = computed(() => {
-  let nums = [props.picks[0], props.picks[1], props.picks[2], props.fireball];
-  return nums
-})
+  let nums = [props.picks[0], props.picks[1], props.picks[2], props.fireball]
+  return nums;
+});
 
 const resultFireball = computed(() => {
-  return props.picks[3]
-})
+  return props.picks[3];
+});
 </script>
 
 <template>
@@ -30,11 +32,14 @@ const resultFireball = computed(() => {
       </div>
     </div>
 
-      <div class="fireball">
-        <div>Fireball: <span> {{ resultFireball }} </span></div>
+    <div class="fireball">
+      <div>
+        Fireball:
+        <span>{{ resultFireball }}</span>
       </div>
-          <BgStars />
-
+    </div>
+    <button @click.prevent="emit('next-game')">Next Game</button>
+    <BgStars />
   </div>
 </template>
 
