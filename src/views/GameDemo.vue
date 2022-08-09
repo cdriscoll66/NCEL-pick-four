@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { gamesStore } from '@/store/GamesStore'
 import BgStars from '../components/BgStars.vue'
 import PlayResults from '../components/PlayResults.vue'
@@ -9,6 +9,10 @@ import EighteenModal from '../components/EighteenModal.vue'
 const emit = defineEmits(['music'])
 
 const store = gamesStore()
+
+onMounted(() => {
+      emit('music', 'audio/FunkyInFunky.mp3')
+})
 
 const state = reactive({
   showResults: false,
@@ -21,7 +25,6 @@ const state = reactive({
   },
   closeModal: () => {
     store.confirmEighteen()
-    emit('music', 'audio/FunkyInFunky.mp3')
   },
 })
 
