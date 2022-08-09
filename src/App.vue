@@ -88,7 +88,7 @@ const Music = (song) => {
           </span>
           <span>Learn</span>
         </RouterLink>
-        <RouterLink class="play-icon" to="/game2">
+        <RouterLink class="play-icon" to="/game">
           <span class="nav-icon">
             <img width="26" height="24.95" alt="Play Icon" :src="PlayIcon" />
             <span class="top-left"></span>

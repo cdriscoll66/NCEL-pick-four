@@ -1,97 +1,82 @@
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive } from 'vue'
+import { gamesStore } from '@/store/GamesStore'
+import BgStars from '../components/BgStars.vue'
+import PlayResults from '../components/PlayResults.vue'
+import GameBoard from '../components/GameBoard.vue'
+import EighteenModal from '../components/EighteenModal.vue'
 
-const picks = reactive([null, null, null, null])
-const winners = reactive([]);
-const selectNum = (num, slot) => {
-  picks[slot] = num
-}
+const emit = defineEmits(['music'])
 
+const store = gamesStore()
+
+const state = reactive({
+  showResults: false,
+  instructions: 'pick four numbers!',
+  picks: [null, null, null, null],
+  fireball: null,
+  selectNum: (num, slot) => {
+    state.picks[slot] = num
+  },
+  closeModal: () => {
+    store.confirmEighteen()
+    emit('music', 'audio/FunkyInFunky.mp3')
+  },
+})
 
 const playNumbers = () => {
-  console.log('play the game already');
-  genWinners();
-  
-  checkAnyNumbers();
+  genFireball()
+  store.increment()
+  state.showResults = true
 }
 
-const genWinners = () => {
-  for (let i = 0; i < 4; i++) {
-    // pick a random number between 1 and 10
-    const num = Math.floor(Math.random() * 10) + 1
-    winners.push(num)
+const genFireball = () => {
+  let num = Math.floor(Math.random() * 10) + 1
+  if (state.picks.includes(num)) {
+    genFireball()
+  } else {
+    state.fireball = num
   }
 }
-
-const checkAnyNumbers = () => {
- picks.map((num) => {
-   if (winners.includes(num)) {
-   
-   }
-   })
- };
-
-
 </script>
 
 <template>
   <main>
-    <div class="picks">
-      <div class="pick" v-for="(pick, i) in picks">
-        <h3 class="number">{{ i }}</h3>
-        <div class="select-num">
-          <div v-for="index in 10" :key="index">
-            <button
-              v-if="picks[i] == index"
-              class="active"
-              @click.prevent="selectNum(index, i)"
-            >
-              {{ index }}
-            </button>
-            <button v-else @click.prevent="selectNum(index, i)">
-              {{ index }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bottom">
-    <div class="selection">
-      {{ picks.join(', ') }}
+    <EighteenModal
+      v-show="(!store.iseighteen)"
+      @confirm-yes="state.closeModal"
+    ></EighteenModal>
+
+    <h2>{{ state.instructions }}</h2>
+
+    <GameBoard :dupes=false :picks="state.picks" @select-num="state.selectNum"></GameBoard>
+
+    <div v-show="!state.picks.includes(null)" class="bottom">
+      <button @click.prevent="playNumbers()">Play!</button>
     </div>
 
-    <div class="winners">
-      <button @click.prevent="playNumbers()">Play!</button>
-      <div class="winner" v-for="(winner, i) in winners">
-        <h3 class="number">{{ winner }}</h3>
-      </div>
-    </div>
-    </div>
+    <PlayResults
+      v-show="(state.showResults)"
+      :picks="state.picks"
+      :fireball="state.fireball"
+    ></PlayResults>
+    <BgStars green="true" />
   </main>
 </template>
 
 <style scoped>
-h3.number {
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--vt-c-white);
   text-align: center;
-}
-
-.select-num {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-button.active {
-  background-color: var(--color-green-dark);
-  color: var(--color-text);
+  margin-top: 40px;
 }
 
 .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px 10px;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup>
 
-const props = defineProps(['picks']);
+const props = defineProps(['picks', 'dupes']);
 const emit = defineEmits(['select-num']);
 
 const selectNum = (num, slot) => {
@@ -12,7 +12,25 @@ const selectNum = (num, slot) => {
 <template>
 <div class="picks">
       <div class="pick" v-for="(pick, i) in props.picks">
-        <div class="select-num">
+
+      <!-- if Duplicates are allowed - This will be the game board -->
+        <div v-if="props.dupes" class="select-num">
+          <div v-for="index in 10" :key="index">
+            <button
+              v-if="props.picks[i] == index"
+              class="active"
+              @click.prevent="selectNum(index, i)"
+            >
+              {{ index }}
+            </button>
+            <button v-else @click.prevent="selectNum(index, i)">
+              {{ index }}
+            </button>
+          </div>
+        </div>
+
+      <!-- No Duplicate Numbers allow -->
+        <div v-else class="select-num">
           <div v-for="index in 10" :key="index">
             <button
               v-if="props.picks[i] == index"
