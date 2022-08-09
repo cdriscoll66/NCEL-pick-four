@@ -68,7 +68,7 @@ const genFireball = () => {
 <template>
   <main>
     <EighteenModal
-      v-show="(!store.iseighteen)"
+      v-if="(!store.iseighteen)"
       @confirm-yes="state.closeModal"
     ></EighteenModal>
 
@@ -85,7 +85,7 @@ const genFireball = () => {
     </div>
 
     <PlayResults
-      v-show="(state.showResults)"
+      v-if="(state.showResults)"
       :picks="state.picks"
       :fireball="state.fireball"
       @next-game="nextGame"
