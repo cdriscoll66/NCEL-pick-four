@@ -66,9 +66,13 @@ const exit = () => {
 }
 
 const Music = (song) => {
+  if (state.music == song){
+    return
+  } else {
   state.music = song
   bgMusic.src = state.music
   bgMusic.play()
+  }
 }
 </script>
 
@@ -146,7 +150,6 @@ nav {
 
 nav a {
   color: var(--vt-c-white);
-  margin-top: 5px;
 }
 
 nav a.router-link-exact-active {
@@ -160,7 +163,10 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: flex;
   flex-flow: column nowrap;
-  padding: 0 1rem;
+  padding: 0 .75rem;
+}
+nav a span.nav-icon {
+  margin-top: 5px;
 }
 
 nav .nav-icon:after {
@@ -179,13 +185,14 @@ nav a:first-of-type {
   border: 0;
 }
 
-a.play-icon {
+.play-icon span.nav-icon {
   width: 92px;
   height: 70px !important;
-  margin: 0 6px -10px;
+  margin: 0 6px -25px;
   padding: 6px 10px 8px !important;
   border-radius: 0 0 20px 20px;
   background-color: var(--color-green-light);
+  position: relative;
 }
 
 .top-right,
@@ -195,6 +202,7 @@ a.play-icon {
   width: 10px;
   height: 10px;
   background-color: var(--color-green-light);
+  display: none !important; /* hiding for now. */
 }
 
 .top-left::before,
@@ -203,7 +211,6 @@ a.play-icon {
   display: block;
   width: 100%;
   height: 100%;
-  background-color: var(--color-green-light);
 }
 
 .top-right {
