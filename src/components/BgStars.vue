@@ -1,12 +1,17 @@
 <script setup>
 import YellowStars from '../assets/background-stars.svg';
 import GreenStars from '../assets/background-stars--green.svg';
-const props = defineProps(['green']);
+const props = defineProps(['green', 'gray'], {
+  default: {
+    green: false,
+    gray: false
+  }
+});
 
 </script>
 
 <template>
-    <div class="bg-stars__cover" :class="{green: props.green}">
+    <div class="bg-stars__cover" :class="{green: props.green, gray: props.gray}">
         <div class="bg-stars__inner">
             <div class="bg-stars__stars"></div>
         </div>
@@ -62,5 +67,14 @@ const props = defineProps(['green']);
     .green.bg-stars__cover {
         background-color: rgba(0, 122, 61);
         background: linear-gradient(180deg, rgba(0, 122, 61) 0%, rgba(0, 61, 31) 57.87%);
+    }
+
+    .gray .bg-stars__stars {
+        background-image: url(../assets/background-stars--gray.svg);
+    }
+
+    .gray.bg-stars__cover {
+        background-color: #a7a7a7;
+        background: linear-gradient(180deg, #a7a7a7 0%, #c7c7c7 57.87%);
     }
 </style>
