@@ -185,6 +185,9 @@ nav a:first-of-type {
   border: 0;
 }
 
+.play-icon {
+  padding: 0;
+}
 .play-icon span.nav-icon {
   width: 92px;
   height: 70px !important;
