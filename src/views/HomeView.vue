@@ -23,16 +23,19 @@ onMounted(() => {
   loadInTL.to('#age-warning', { delay: 0, duration: 0.6, opacity: 1, y: 0 })
 });
 
+let click = new Audio('../audio/sprite/button_click.mp3')
 
 const onLeave = (path) => {
+  click.play();
+  setTimeout (() => {
   if(path == 'tutorial') {
-    console.log('one')
       emit('music', '/audio/3FunkShortVersion.mp3')
   }
   else {
-    console.log('two')
-        emit('music', 'audio/FunkyInFunky.mp3')
+      emit('music', 'audio/FunkyInFunky.mp3')
   }
+    }, 500)
+
   let loadOutTL = gsap.timeline({delay: 0.5})
       loadOutTL.to('#tutbtntxt', { delay: 0, duration: 0.4, opacity: 0, 'pointer-events': 'none' });
       loadOutTL.to('#demobtntxt', { delay: -0.4, duration: 0.4, opacity: 0, 'pointer-events': 'none' });
