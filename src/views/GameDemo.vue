@@ -6,7 +6,7 @@ import PlayResults from '../components/PlayResults.vue'
 import GameBoard from '../components/GameBoard.vue'
 import EighteenModal from '../components/EighteenModal.vue'
 
-const emit = defineEmits(['music'])
+const emit = defineEmits(['music', 'musicplaypause'])
 
 const store = gamesStore()
 

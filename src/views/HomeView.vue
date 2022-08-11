@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import BgStars from '../components/BgStars.vue'
 import Sphere from '../components/Sphere.vue'
@@ -10,6 +10,8 @@ import Goldstar from '../assets/star-gold.svg'
 
 const router = useRouter()
 const route = useRoute()
+const sphere = ref(null);
+const emit = defineEmits(['music', 'musicplaypause'])
 
 onMounted(() => {
   let loadInTL = gsap.timeline({delay: 2,})
@@ -21,7 +23,6 @@ onMounted(() => {
   loadInTL.to('#age-warning', { delay: 0, duration: 0.6, opacity: 1, y: 0 })
 });
 
-const emit = defineEmits(['music']);
 
 const onLeave = (path) => {
   if(path == 'tutorial') {
@@ -54,14 +55,13 @@ const onLeave = (path) => {
   }
 }
 
-
-
+ 
 
 </script>
 
 <template>
   <main>
-    <Sphere :class="{ sphere }" />
+    <Sphere :class="sphere" />
     <a id="tutbtn" href @click.prevent="onLeave('tutorial')" class="accent-button">
       <div id="tutbtntxt">
         <span class="button__title">Learn the Game</span>
