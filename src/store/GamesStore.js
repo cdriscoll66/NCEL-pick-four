@@ -5,6 +5,7 @@ export const gamesStore = defineStore('games', {
     state: () => ({ 
         count: 0,
         iseighteen: false,
+        presentGame: null,
      }),
     actions: {
         increment() {
@@ -12,6 +13,9 @@ export const gamesStore = defineStore('games', {
         },
         confirmEighteen() {
             this.iseighteen = true
+        },
+        setPresentGame(game) {
+            this.presentGame = game
         }
     }
 });

@@ -1,17 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import gsap from 'gsap'
-import BgStars from '../components/BgStars.vue'
-import Sphere from '../components/Sphere.vue'
-import { useRouter, useRoute } from 'vue-router'
-import Greenstar from '../assets/star-green.svg'
-import Higreenstar from '../assets/star-higreen.svg'
-import Goldstar from '../assets/star-gold.svg'
+import { onMounted, ref } from 'vue';
+import gsap from 'gsap';
+import BgStars from '../components/BgStars.vue';
+import Sphere from '../components/Sphere.vue';
+import { useRouter, useRoute } from 'vue-router';
+import Greenstar from '../assets/star-green.svg';
+import Higreenstar from '../assets/star-higreen.svg';
+import Goldstar from '../assets/star-gold.svg';
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 const sphere = ref(null);
-const emit = defineEmits(['music', 'musicplaypause'])
+const emit = defineEmits(['music', 'musicplaypause']);
 
 onMounted(() => {
   let loadInTL = gsap.timeline({delay: 2,})
@@ -23,7 +23,7 @@ onMounted(() => {
   loadInTL.to('#age-warning', { delay: 0, duration: 0.6, opacity: 1, y: 0 })
 });
 
-let click = new Audio('../audio/sprite/button_click.mp3')
+let click = new Audio('../audio/sprite/button_click.mp3');
 
 const onLeave = (path) => {
   click.play();
@@ -56,7 +56,7 @@ const onLeave = (path) => {
   function changePage() {
   router.replace({ name: path })
   }
-}
+};
 
  
 
@@ -92,69 +92,12 @@ const onLeave = (path) => {
     <img class="transition-stars__star star__green" width="124.4" height="124.4" :src=Greenstar alt="star">
     <img class="transition-stars__star star__gold" width="124.4" height="124.4" :src=Goldstar alt="star">
     <img class="transition-stars__star star__higreen" width="124.4" height="124.4" :src=Higreenstar alt="star">
-</div>
+    </div>
   </main>
-  <BgStars gray="true" />
+  <BgStars />
 </template>
 
 <style scoped>
-a.accent-button {
-  padding: 8px 24px 10px;
-  background: var(--color-green-accent);
-  box-shadow: 0px 4px 0px 0px var(--color-green),
-    0px 0px 4px 0px var(--color-green);
-  border-radius: 8px;
-  border-width: 0;
-  color: var(--vt-c-white);
-  margin: 24px 32px 0;
-  min-width: 300px;
-  display:block;
-}
-
-a.accent-button div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-a.accent-button:hover {
-  background: var(--color-green-light);
-}
-
-.button__title {
-  font-style: italic;
-  font-weight: 900;
-  font-size: 28px;
-  line-height: 1.2;
-  text-align: center;
-  text-shadow: -1px 1px 1px var(--color-green-darkest);
-}
-
-.button__subtitle {
-  font-size: 14px;
-  line-height: 1.2;
-  text-align: center;
-  letter-spacing: -0.35px;
-  text-shadow: -1px 1px 1px var(--color-green-darkest);
-}
-
-.button__subtitle:before,
-.button__subtitle:after {
-  content: '';
-  display: block;
-  height: 10px;
-  width: 10px;
-  background: url(../assets/goldstar.svg) no-repeat center;
-  background-size: contain;
-  position: absolute;
-  top: calc(50% - 3px);
-  left: -15px;
-}
-
-.button__subtitle:after {
-  left: auto;
-  right: -15px;
-}
 
 .home-warnings {
   margin: 20px 30px 0;

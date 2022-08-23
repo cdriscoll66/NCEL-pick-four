@@ -15,7 +15,7 @@ const selectNum = (num, slot) => {
 
       <!-- if Duplicates are allowed - This will be the game board -->
         <div v-if="props.dupes" class="select-num">
-          <div v-for="index in 10" :key="index">
+          <div v-for="(n, index) in 10" :key="index">
             <button
               v-if="props.picks[i] == index"
               class="active"
@@ -31,7 +31,7 @@ const selectNum = (num, slot) => {
 
       <!-- No Duplicate Numbers allow -->
         <div v-else class="select-num">
-          <div v-for="index in 10" :key="index">
+          <div v-for="(n, index) in 10" :key="index">
             <button
               v-if="props.picks[i] == index"
               class="active"
@@ -71,17 +71,19 @@ const selectNum = (num, slot) => {
 }
 
 .picks button {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid #000;
-  background-color: #fff;
-  color: #000;
-  font-size: 15px;
-  font-weight: bold;
+  width: 26px;
+  height: 36px;
+  border-radius: 3.94px;
+  border: 1px solid #CF271C;
+  background: linear-gradient(#C7D5CE, #ffffff);
+  color: #CF271C;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  padding: unset;
 }
 button.active {
   background-color: var(--color-gold);
