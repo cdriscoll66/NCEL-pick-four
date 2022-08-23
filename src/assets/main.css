@@ -1,19 +1,20 @@
+@import "./fonts.css";
 @import "./base.css";
 
 #app {
-    background: var(--color-background);
-    top: 50%;
-    left: 50%;
-    width: 375px;
-    height: 635px;
-    transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%) scale(var(--viewport-scale));
+  background: var(--color-background);
+  top: 50%;
+  left: 50%;
+  width: 375px;
+  height: 635px;
+  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--viewport-scale));
 }
 
 main {
   position: relative;
   padding-top: 60px;
-  height: 100%; 
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }
@@ -24,10 +25,88 @@ a,
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
 }
-/* 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-} */
 
+a.accent-button {
+  padding: 8px 24px 10px;
+  background: var(--color-green-accent);
+  box-shadow: 0px 4px 0px 0px var(--color-green),
+    0px 0px 4px 0px var(--color-green);
+  border-radius: 8px;
+  border-width: 0;
+  color: var(--vt-c-white);
+  margin: 24px 32px 0;
+  min-width: 300px;
+  display: block;
+}
+
+a.btn-gray {
+  box-shadow: 0px 4px 0px 0px #606060,
+    0px 0px 4px 0px #606060;
+  background: #A0A0A0;
+}
+
+a.accent-button div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a.accent-button:hover {
+  background: var(--color-green-light);
+}
+
+a.btn-gray:hover {
+  background: #909090;
+}
+
+
+.button__title {
+  font-style: italic;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: -1px 1px 1px var(--color-green-darkest);
+}
+
+.button__subtitle {
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: -0.35px;
+  text-shadow: -1px 1px 1px var(--color-green-darkest);
+}
+
+.button__subtitle:before,
+.button__subtitle:after {
+  content: '';
+  display: block;
+  height: 10px;
+  width: 10px;
+  background: url(../assets/goldstar.svg) no-repeat center;
+  background-size: contain;
+  position: absolute;
+  top: calc(50% - 5px);
+  left: -15px;
+}
+
+.button__subtitle:after {
+  left: auto;
+  right: -15px;
+}
+
+button {
+  font-family: 'Odudo', Arial, Helvetica, sans-serif;
+}
+
+a.small-btn {
+  color: var(--vt-c-white);
+  background: var(--color-green-accent);
+  font-size: 12px;
+  font-weight: 700;
+  font-style: italic;
+  text-shadow: -1px 1px 1px #007A3D; ;
+  box-shadow: 0px 0px 4px rgba(0, 122, 61, 0.8), inset 0px 1px 3px #0BCE65;
+  border-radius: 8px;
+  padding: 3px 12px;
+}

@@ -1,0 +1,71 @@
+@font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-RegularOblique.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-Light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("fonts/OdudoSlab-LightOblique.otf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-SemiBold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-SemiBoldOblique.otf") format("opentype");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("fonts/OdudoSlab-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Odudo";
+    src: url("/fonts/OdudoSlab-BoldOblique.otf") format("opentype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Avenir Next";
+    src: url("/fonts/AvenirLTStd-Medium") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
