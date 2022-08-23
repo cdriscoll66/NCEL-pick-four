@@ -46,7 +46,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   background-color: var(--color-green-darkest);
-  z-index: 1;
+  z-index: 3;
   padding: 50px 30px 0 30px;
 }
 

@@ -14,7 +14,6 @@ const state = reactive({
   showProTip: false,
 })
 
-
 const closeModal = () => {
   store.confirmEighteen()
 }
@@ -39,7 +38,7 @@ onMounted(() => {
       @confirm-yes="closeModal"
     ></EighteenModal>
       <div v-if="(store.presentGame === 'exact')" class="game-exact">
-      <GameExact></GameExact>
+      <GameExact @protip="state.showProTip = true"></GameExact>
       </div>
     <div v-else-if="(store.presentGame === 'fifty')" class="game-fifty">
       <h2>50/50</h2>
@@ -80,18 +79,18 @@ onMounted(() => {
 
 <style>
 
-.game-select {
+.game-select, .game-exact {
   height: 100%;
 }
 
-.game-select .btn-row {
+.btn-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 8px 0;
+  margin: 30px 8px;
 }
 
-.game-select__container {
+.game-select__container, .rules-select__container {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -99,12 +98,12 @@ onMounted(() => {
   height: 100%;
 }
 
-.game-select__list {
+.game-select__list, .rules-select__list {
   display: flex;
   flex-flow: column nowrap;
 }
 
-.game-select__list a {
+.game-select__list a, .rules-select__list a {
   display: flex;
   flex-flow: row nowrap;
   font-size: 24px;
@@ -114,7 +113,7 @@ onMounted(() => {
   margin-bottom: 30px;
 }
 
-.game-select__list a::before {
+.game-select__list a::before, .rules-select__list a::before {
   content: '';
   display: block;
   width: 39px;
@@ -141,7 +140,7 @@ h2 span {
 
 .info-point {
   display: flex;
-  margin-top: 30px;
+  margin: 30px auto;
   width: 240px;
 }
 

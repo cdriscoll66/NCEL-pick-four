@@ -57,9 +57,6 @@ const selectNum = (num, slot) => {
 </template>
 
 <style scoped>
-.picks {
-  margin-top: 30px;
-}
 
 .select-num {
   display: flex;

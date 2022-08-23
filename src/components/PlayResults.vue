@@ -37,12 +37,12 @@ state.showWinner = false;
 
 
 const winners = computed(() => {
-  let nums = [props.picks[0], props.picks[1], props.picks[2], props.fireball]
+  let nums = [props.picks[0], props.picks[1], props.fireball]
   return nums;
 });
 
 const resultFireball = computed(() => {
-  return props.picks[3];
+  return props.picks[2];
 });
 </script>
 
