@@ -78,7 +78,9 @@ a.btn-gray:hover {
 }
 
 .button__subtitle:before,
-.button__subtitle:after {
+.button__subtitle:after,
+ .one-line .button__title:before,
+ .one-line .button__title:after {
   content: '';
   display: block;
   height: 10px;
@@ -89,7 +91,7 @@ a.btn-gray:hover {
   top: calc(50% - 5px);
   left: -15px;
 }
-
+.one-line .button__title:before,
 .button__subtitle:after {
   left: auto;
   right: -15px;
