@@ -1,5 +1,9 @@
 <script setup>
 import BgStars from '../components/BgStars.vue'
+import { gamesStore } from '@/store/GamesStore'
+import Fireball from '../assets/fireball.png'
+
+const store = gamesStore()
 
 const emit = defineEmits(['close']);
 
@@ -14,8 +18,11 @@ const emit = defineEmits(['close']);
           Close Pro Tip
         </a>
       </div>
-
-      <div class="modal__text">
+      <div v-if="(store.showfireball)" class="modal__text">
+          <img width="183" height="21" alt="Fireball" :src="Fireball" />
+          <h2 class="highlighted">Fireball wins are prizes <span>in addition to </span>any other Pick 3 wins.</h2>
+      </div>
+      <div v-else class="modal__text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -63,7 +70,8 @@ const emit = defineEmits(['close']);
 }
 
 .modal__content {
-  padding-top: 90px;
+  padding-top: 80px;
+  min-height: 100%;
 }
 .modal__text {
   margin: 32px 40px;
@@ -83,5 +91,13 @@ p {
 h2 {
   color: var(--color-gold);
   margin: 24px 0 8px;
+}
+
+h2.highlighted {
+  color: var(--vt-c-white);
+}
+
+h2.highlighted span {
+  color: var(--color-gold);
 }
 </style>
