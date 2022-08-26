@@ -3,7 +3,8 @@ import { onMounted, reactive } from 'vue'
 import { gamesStore } from '@/store/GamesStore'
 import BgStars from '../components/BgStars.vue'
 import EighteenModal from '../components/EighteenModal.vue'
-import GameExact from '../components/GameExact.vue'
+import GameFrame from '../components/GameFrame.vue'
+
 import ProTip from '../components/ProTipModal.vue'
 
 const emit = defineEmits(['music', 'musicplaypause'])
@@ -28,6 +29,8 @@ const chooseGame = (game) => {
 
 onMounted(() => {
   emit('music', 'audio/FunkyInFunky.mp3')
+  store.setPresentGame(null)
+  store.resetPicksAndFireball()
 });
 </script>
 
@@ -37,16 +40,11 @@ onMounted(() => {
       v-if="(!store.iseighteen)"
       @confirm-yes="closeModal"
     ></EighteenModal>
-      <div v-if="(store.presentGame === 'exact')" class="game-exact">
-      <GameExact @protip="state.showProTip = true"></GameExact>
+      
+      <div v-if="(store.presentgame)" class="game-exact">
+      <GameFrame @protip="state.showProTip = true"></GameFrame>
       </div>
-    <div v-else-if="(store.presentGame === 'fifty')" class="game-fifty">
-      <h2>50/50</h2>
-    </div> 
-
-      <div v-else-if="(store.presentGame === 'any')" class="game-any">
-      <h2>Any</h2>
-      </div>
+    
       <div v-else class="game-select">
 
         <div class="btn-row">
@@ -87,7 +85,8 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 8px;
+  margin: 20px 8px;
+  z-index: 1;
 }
 
 .game-select__container, .rules-select__container {

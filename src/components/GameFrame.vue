@@ -1,5 +1,4 @@
 <script setup>
-import { reactive } from 'vue'
 import { gamesStore } from '@/store/GamesStore'
 import PlayResults from '../components/PlayResults.vue'
 import GameBoard from '../components/GameBoard.vue'
@@ -9,105 +8,67 @@ const emit = defineEmits(['music', 'musicplaypause', 'protip'])
 
 const store = gamesStore()
 
-const state = reactive({
-  presentRules: null,
-  gameRules: [
-    {
-      id: 0,
-      gamerulesdupes: false,
-      instructions1: 'Select Your Numbers,',
-      instructions2: 'one per row.',
-      gamenote:
-        'Explainer text about not being able to select the same number more than once...',
-    },
-    {
-      id: 1,
-      gamerulesdupes: true,
-      instructions1: 'Select Your Numbers,',
-      instructions2: 'All three numbers should be the same.',
-      gamenote:
-        'Explainer text about having to select the exact same number across the board...',
-    },
-  ],
-  showResults: false,
-  showFireball: false,
-  picks: [null, null, null],
-  fireball: null,
-  selectNum: (num, slot) => {
-    state.picks[slot] = num
-  },
-})
+
+ 
 
 const numberSelection = (num, slot) => {
-  if (state.presentRules == 1) {
-    state.picks = [num, num, num]
-  } else {
-    state.selectNum(num, slot)
+  if (store.presentrules == 1) {
+    store.setSame(num)
+  } else if (store.presentrules == 2) {
+    if (slot == 0 || slot == 1) {
+      store.selectNum(num, 0)
+      store.selectNum(num, 1)
+    } else {
+      store.selectNum(num, 2);
+    }
+  }
+    else {
+    store.selectNum(num, slot)
   }
 }
 
 const quickPick = () => {
   // generate an array of 3 integers between 0 and 9 but they must be unique.
-  if (state.presentRules == 0) {
-    const random = () => {
-      return Math.floor(Math.random() * 10)
-    }
-    const randomArray = () => {
-      const arr = []
-      for (let i = 0; i < 3; i++) {
-        let num = random()
-        while (arr.includes(num)) {
-          num = random()
-        }
-        arr.push(num)
-      }
-      return arr
-    }
-    const arr = randomArray()
-    state.picks = arr
-  } else if (state.presentRules == 1) {
+  if (store.presentrules == 0) {
+    store.randomNums();
+  } else if (store.presentrules == 1) {
     let num = Math.floor(Math.random() * 10)
-    state.picks = [num, num, num]
+    store.setSame(num)
+  } else if (store.presentrules == 2) {
+    store.randomTwoNums();
   }
 }
 
-const playNumbers = () => {
-  state.showFireball = true
-  // genFireball()
-  // state.showResults = true
+const queryFireball = () => {
+  store.showFireball()
 }
 
 const playFireball = () => {
-  state.showFireball = false
-  genFireball()
-  state.showResults = true
+  store.hideFireball()
+  store.useFireball()
+  store.genFireball()
+  store.showResults()
 }
 
 const optOut = () => {
-  state.showFireball = false
-  state.fireball = 99
-  state.showResults = true
+  store.hideFireball()
+  store.noFireball()
+  store.genFireball()
+  store.showResults()
 }
 
 
 const nextGame = () => {
-  state.showResults = false
-  state.picks = [null, null, null]
-  state.presentRules = null
+  store.hideResults()
+  store.resetPicksandFireball()
+  store.setPresentRules(null)
 }
 
 const chooseRules = (num) => {
-  state.presentRules = num
+  store.setPresentRules(num)
 }
 
-const genFireball = () => {
-  let num = Math.floor(Math.random() * 10) + 1
-  if (state.picks.includes(num)) {
-    genFireball()
-  } else {
-    state.fireball = num
-  }
-}
+
 </script>
 
 <template>
@@ -117,13 +78,15 @@ const genFireball = () => {
       Prizes & Odds
     </a>
   </div>
-  <div v-if="state.presentRules === null" class="rules-select__container">
+  <div v-if="(store.presentrules === null)" class="rules-select__container">
     <div class="rules-select__list">
       <a href @click.prevent="chooseRules(0)">Pick Different Numbers</a>
-      <a href @click.prevent="chooseRules(1)">Pick all the Same number</a>
+      <a v-if="(store.presentgame == 'exact')" href @click.prevent="chooseRules(1)">Pick all the Same number</a>
+      <a v-else href @click.prevent="chooseRules(2)">Pick 2 the same and one different</a>
     </div>
   </div>
-  <div v-else-if="state.showFireball" class="fireball-pick">
+  <div v-else-if="(store.showfireball)" class="fireball-pick">
+  {{ store.showfireball}}
     <div class="fireball-pick__container">
       <div class="fireball__select">
         <a href @click.prevent="playFireball()">
@@ -139,10 +102,8 @@ const genFireball = () => {
     </div>
     </div>
   </div>
-  <div v-else>
+  <div class="game" v-else>
     <GameBoard
-      :dupes="state.gameRules[state.presentRules].gamerulesdupes"
-      :picks="state.picks"
       @select-num="numberSelection"
     ></GameBoard>
 
@@ -150,34 +111,42 @@ const genFireball = () => {
       <a href @click.prevent="quickPick">Quick Pick</a>
     </div>
 
-    <div class="play-note info-point">
-      <p>{{ state.gameRules[state.presentRules].gamenote }}</p>
-    </div>
+  
 
-    <div v-show="!state.picks.includes(null)" class="bottom play">
-      <button @click.prevent="playNumbers()">Play!</button>
+    <div  class="bottom play">
+      <div class="play-note info-point">
+      <p>{{ store.gamerules[store.presentrules].gamenote }}</p>
+    </div>
+      <a v-show="!store.picks.includes(null)" href class="accent-button" @click.prevent="queryFireball()">Play!</a>
     </div>
 
     <h2>
-      {{ state.gameRules[state.presentRules].instructions1 }}
-      <span>{{ state.gameRules[state.presentRules].instructions2 }}</span>
+      {{ store.gamerules[store.presentrules].instructions1 }}
+      <span>{{ store.gamerules[store.presentrules].instructions2 }}</span>
     </h2>
 
     <PlayResults
-      v-if="(state.showResults)"
-      :picks="state.picks"
-      :fireball="state.fireball"
+      v-if="(store.showresults)"
       @next-game="nextGame"
     ></PlayResults>
   </div>
 </template>
 
 <style scoped>
+
+.game {
+  height: calc(100% - 90px);
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 40px 10px;
+}
+
+
 .quick-pick {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 30px 8px 0;
+  margin: 10px 8px 0;
 }
 
 .quick-pick a, .fireball__select a {
@@ -193,8 +162,8 @@ const genFireball = () => {
 .quick-pick a::before, .fireball__select a::before {
   content: '';
   display: block;
-  width: 26px;
-  height: 36px;
+  width: 30px;
+  height: 40px;
   background-color: var(--vt-c-white);
   border-radius: 3.94px;
   border: 1px solid var(--color-fireball-red);
@@ -206,17 +175,19 @@ h2 {
   font-weight: bold;
   color: var(--vt-c-white);
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .bottom {
   display: flex;
-  justify-content: center;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
   align-items: center;
+  flex-grow: 1;
 }
 
-.play {
-  margin-top: -52px;
+.play-note, .play-note p {
+  margin-bottom: 0;
 }
 
 .fireball-pick {
