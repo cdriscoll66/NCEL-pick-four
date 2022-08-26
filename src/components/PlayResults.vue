@@ -1,142 +1,134 @@
 <script setup>
-import { computed, onMounted, reactive } from 'vue';
-import gsap from 'gsap';
-import BgStars from './BgStars.vue';
-import Winner from './Winner.vue';
+import { reactive } from 'vue'
+import { gamesStore } from '@/store/GamesStore'
+import BgStars from './BgStars.vue'
+import ConfirmScreen from './ConfirmNumbersScreen.vue'
+import Winner from './Winner.vue'
+import ShouldaFireballed from './ShouldaFireballed.vue'
+const store = gamesStore()
 
-const props = defineProps(['picks', 'fireball']);
-const emit = defineEmits(['next-game']);
+const emit = defineEmits(['next-game'])
 
 const state = reactive({
-  showWinner: false,
-});
-
-onMounted (() => {
-  let fbtimeline = gsap.timeline({
-    delay: 2,
-    repeat: 0,
-  });
-    fbtimeline.to('#fireball', {duration: 1, scale: .85, x: -55, y:-83, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: .1, scale: 1, yoyo: true, repeat: 2, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: 1, scale: .85, x: -20, y:-83, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: .1, scale: 1, yoyo: true, repeat: 2, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: 1, scale: .85, x: 20, y:-83, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: .1, scale: 1, yoyo: true, repeat: 2, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: 1, scale: .85, x: 60, y:-83, ease: 'power1.inOut',});
-    fbtimeline.to('#fireball', {duration: .03, scale: 1.2, yoyo: true, repeat: 20, ease: 'power1.inOut'});
-    fbtimeline.call(flashWinner);
-    fbtimeline.to('#fireball', {duration: .5, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut'});
+  showConfirmScreen: true,
 })
 
-const flashWinner = () => {
-  state.showWinner = true;
-  setTimeout(() => {
-state.showWinner = false;
-  }, 2000);
+
+const playRewardScreen = () => {
+  state.showConfirmScreen = false
 }
 
 
-const winners = computed(() => {
-  let nums = [props.picks[0], props.picks[1], props.fireball]
-  return nums;
-});
-
-const resultFireball = computed(() => {
-  return props.picks[2];
-});
 </script>
 
 <template>
-  <div class="results-modal">
-    <h3>Your Numbers:</h3>
-    <div class="picks">
-      <div v-for="(num, i) in props.picks" :key="(i)">
-        {{ num }}
-      </div>
-    </div>
+  <div class="play-results">
 
-    <h3>Winner Numbers:</h3>
-    <div class="winners">
-      <div v-for="(num, i) in winners" :key="(i)">
-        {{ num }}
-      </div>
+    <div class="results-modal">
+          <div v-if="state.showConfirmScreen" class="confirm-screen">
+           <ConfirmScreen 
+          @play-reward-screen="playRewardScreen"
+          />
+          </div>
+          <div v-else class="winner-screen">
+            <Winner v-if="store.fireballselected" />
+            <ShouldaFireballed v-else/>
+          </div> 
+      <BgStars green="true"/>
     </div>
-
-    <div class="fireball">
-        Fireball:
-        <span id="fireball">{{ resultFireball }}</span>
-        <span>{{ resultFireball }}</span>
-
-    </div>
-    <Winner v-if="state.showWinner"></Winner>
-    <div class="bottom">
-
-    <button @click.prevent="emit('next-game')">Next Game</button>
-    </div>
-    <BgStars />
   </div>
 </template>
 
 <style scoped>
+
+
 .results-modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   opacity: 1;
-
+  color: var(--vt-c-white);
   z-index: 1;
-  padding: 90px 10px 10px;
+  padding: 60px 0 0 0;
+  display:flex;
+  flex-flow: column nowrap;
 }
 
-h3,
-.picks {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-green-darkest);
-  text-align: center;
-}
-.picks,
-.winners {
+.confirm-screen, .winner-screen {
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin-bottom: 30px;
-  font-style: italic;
-}
+  flex-flow: column nowrap;
 
+}
 .bottom {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+.fireball-mark {
+  display: flex;
+  align-items: center;
+}
+
+h2.game-type {
+  margin-bottom: 5px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+h2.game-type::before, .fireball-mark::before {
+  content: '';
+  width: 30px;
+  height: 40px;
+  background-color: #CF271C;
+  border-radius: 3.94px;
+  margin-right: 10px;
+}
+
+.picks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+}
+.picks .pick {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 6px;
 }
 
-
-.fireball {
-  text-align: center;
-}
-
-.fireball span {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-fireball-red);
-  background-color: var(--vt-c-white);
-  border: 3px solid var(--color-fireball-red);
-  border-radius: 50%;
-  width: 40px;
+.num {
+  width: 30px;
   height: 40px;
-  display: flex;
+  border-radius: 3.94px;
+  border: 1px solid #CF271C;
+  background: linear-gradient(#C7D5CE, #ffffff);
+  color: #CF271C;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  display:flex;
   justify-content: center;
   align-items: center;
-  font-weight: 800;
-  position: absolute;
-  z-index: 3;
-  left: calc(50% - 20px);
-
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: unset;
+  opacity: .5;
 }
+
+.picked {
+  opacity: 1;
+  color: var(--vt-c-white);
+  background: #CF271C;
+}
+
 </style>
