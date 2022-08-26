@@ -1,6 +1,8 @@
 <script setup>
+import { gamesStore } from '@/store/GamesStore'
 
-const props = defineProps(['picks', 'dupes']);
+const store = gamesStore()
+
 const emit = defineEmits(['select-num']);
 
 const selectNum = (num, slot) => {
@@ -11,13 +13,13 @@ const selectNum = (num, slot) => {
 
 <template>
 <div class="picks">
-      <div class="pick" v-for="(pick, i) in props.picks">
+      <div class="pick" v-for="(pick, i) in store.picks">
 
       <!-- if Duplicates are allowed - This will be the game board -->
-        <div v-if="props.dupes" class="select-num">
+        <div v-if="store.presentrules === 1" class="select-num">
           <div v-for="(n, index) in 10" :key="index">
             <button
-              v-if="props.picks[i] == index"
+              v-if="store.picks[i] == index"
               class="active"
               @click.prevent="selectNum(index, i)"
             >
@@ -29,18 +31,19 @@ const selectNum = (num, slot) => {
           </div>
         </div>
 
+
       <!-- No Duplicate Numbers allow -->
         <div v-else class="select-num">
           <div v-for="(n, index) in 10" :key="index">
             <button
-              v-if="props.picks[i] == index"
+              v-if="store.picks[i] == index"
               class="active"
               @click.prevent="selectNum(index, i)"
             >
               {{ index }}
             </button>
             <button
-              v-else-if="props.picks.includes(index)"
+              v-else-if="store.picks.includes(index)"
               disabled
               class="disabled"
               @click.prevent="selectNum(index, i)"
@@ -63,13 +66,13 @@ const selectNum = (num, slot) => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   margin-bottom: 30px;
 }
 
 .picks button {
-  width: 26px;
-  height: 36px;
+  width: 30px;
+  height: 40px;
   border-radius: 3.94px;
   border: 1px solid #CF271C;
   background: linear-gradient(#C7D5CE, #ffffff);
@@ -83,8 +86,8 @@ const selectNum = (num, slot) => {
   padding: unset;
 }
 button.active {
-  background-color: var(--color-gold);
-  color: var(--vt-c-black);
+  background: #CF271C;
+  color: var(--vt-c-white);
 }
 
 button.disabled {
