@@ -5,9 +5,16 @@ const store = gamesStore()
 
 const emit = defineEmits(['select-num']);
 
+let click = new Audio('../audio/sprite/button_click.mp3');
+
+
 const selectNum = (num, slot) => {
+  click.currentTime = 0;
+    click.play();
     emit('select-num', num, slot);
 };
+
+
 
 </script>
 

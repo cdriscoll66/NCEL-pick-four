@@ -3,7 +3,12 @@ import BgStars from '../components/BgStars.vue';
 
 const emit = defineEmits(['confirm-yes']);
 
+let click = new Audio('../audio/sprite/button_click.mp3');
 
+const confirmation = () => {
+  click.play();
+  emit('confirm-yes');
+}
 
 </script>
 
@@ -12,7 +17,7 @@ const emit = defineEmits(['confirm-yes']);
     <div class="eighteen__form">
     <h2>Are you over 18?</h2>
     <div class="eighteen-buttons">
-      <a href @click.prevent="emit('confirm-yes')" class="accent-button">
+      <a href @click.prevent="confirmation" class="accent-button">
         <span class="button__title">Yes</span>
     </a>
       <a href="https://www.yahoo.com" target="_blank" class="accent-button btn-gray">

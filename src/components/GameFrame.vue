@@ -8,6 +8,7 @@ const emit = defineEmits(['music', 'musicplaypause', 'protip'])
 
 const store = gamesStore()
 
+let click = new Audio('../audio/sprite/button_click.mp3');
 
  
 
@@ -29,6 +30,8 @@ const numberSelection = (num, slot) => {
 
 const quickPick = () => {
   // generate an array of 3 integers between 0 and 9 but they must be unique.
+  click.currentTime = 0;
+  click.play();
   if (store.presentrules == 0) {
     store.randomNums();
   } else if (store.presentrules == 1) {
@@ -65,6 +68,8 @@ const nextGame = () => {
 }
 
 const chooseRules = (num) => {
+  click.currentTime = 0;
+  click.play();
   store.setPresentRules(num)
 }
 
