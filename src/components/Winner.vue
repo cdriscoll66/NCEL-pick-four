@@ -16,26 +16,72 @@ const state = reactive({
     winners: [],
 })
 
+
+
+
 onMounted(() => {
     calcWinners()
 
+
     let tl = gsap.timeline({
-        delay: 2,
         repeat: 0,
     });
+
+    // fade in system
+    tl.to('#winning', {y: 50});
+    tl.to('#fireball__row', {y: 50});
+    tl.to('#picks', {y: 50});
     tl.to('#fireball', {duration: .5, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut'});
-    tl.call(flashWinner);
-    tl.to('#fireball', { delay: 2.5});
-    tl.call(flashReward);
-    tl.to('#fireball', { delay: 2.5});
-    tl.call(showFinal);
+    tl.to ('#winning', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
+    tl.to ('#fireball__row', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
+    tl.to ('#picks', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
+
+    // circle numbers animation    
+    tl.call(circleAnimation);
+    tl.to ('#picks', {duration: 6 });
+
+    // winner flourish
+    tl.call(flashWinner );
+
+    
+    // Reward screen
+    // final Screen
+
+    // tl.to('#fireball', { delay: 2.5});
+    // tl.call(flashReward);
+    // tl.to('#fireball', { delay: 2.5});
+    // tl.call(showFinal);
 })
+
+const circleAnimation = () => {
+     let tl1 = gsap.timeline({
+        repeat: 0,
+    });
+      tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#number-1', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+
+    // fireball cover last number
+    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
+    tl1.to('#fireball', {duration: 1, x:120, y:-206.5, rotate: 0, delay: .5,  ease: 'bounce.out'});
+    tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-2 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+}
+
+
+
+
+const bubble = () => {
+  let bubble = new Audio('../audio/sprite/bubble-pop.mp3');
+  bubble.play();
+}
 
 const flashWinner = () => {
         state.showWinner = true;
-    setTimeout(() => {
-        state.showWinner = false;
-    }, 2000);
+    // setTimeout(() => {
+    //     state.showWinner = false;
+    // }, 2000);
 }
 
 const flashReward = () => {
@@ -61,12 +107,12 @@ const calcWinners = () => {
 
 const resultFireball = computed(() => {
   return store.picks[2]
-})
+});
 </script>
 
 <template>
   <div class="wrapper">
-    <div class="winning-numbers__row">
+    <div id="winning" class="winning-numbers__row">
       <div class="title">
         <h3>
           Pick 3:
@@ -74,26 +120,28 @@ const resultFireball = computed(() => {
         </h3>
       </div>
       <div class="winning-numbers">
-        <div v-for="num in state.winners" class="number">
+        <div v-for="(num, i) in state.winners" v-bind:id="'number-' + i" class="number">
+        <div>
           {{ num }}
+          </div>
         </div>
       </div>
     </div>
-    <div class="fireball__row">
+    <div id="fireball__row" class="fireball__row">
       <div class="title">
         <img width="183" height="21" alt="Fireball" :src="Fireball" />
       </div>
       <div id="fireball" class="number fireball">
-        {{ resultFireball }}
+        <div>{{ resultFireball }}</div>
       </div>
     </div>
-    <div class="picks__row">
+    <div id="picks" class="picks__row">
       <div class="title">
         <h3><span>Your Numbers</span></h3>
       </div>
       <div class="picks">
-        <div v-for="num in store.picks" class="number yours">
-          {{ num }}
+        <div v-for="(num, i) in store.picks" v-bind:id="'pick-' + i" class="number yours">
+          <div>{{ num }}</div>
         </div>
       </div>
     </div>
@@ -105,6 +153,10 @@ const resultFireball = computed(() => {
 </template>
 
 <style scoped>
+
+#winning, #fireball__row, #picks {
+  opacity: 0;
+}
 .wrapper {
   text-align: center;
   display: flex;
@@ -132,7 +184,16 @@ h3 span {
   align-items: center;
   margin-top: 20px;
 }
+
+.fireball__row .title {
+  margin-bottom: 20px;
+}
 .number {
+  border-radius: 50%;
+  border: 5px solid transparent;
+}
+
+.number div { 
   background: radial-gradient(
     56% 56% at 53.18% 22.76%,
     #ffffff 0%,
@@ -150,9 +211,11 @@ h3 span {
   align-items: center;
   font-size: 34px;
   font-weight: 700;
+  font-size: 34px;
+  font-weight: 700;
 }
 
-.fireball {
+.fireball div {
   background: radial-gradient(
     56% 56% at 53.18% 22.76%,
     #cd2b2b 0%,
@@ -162,10 +225,9 @@ h3 span {
     #bf2626 100%
   );
   color: var(--vt-c-white);
-  margin-top: 20px;
 }
 
-.yours {
+.yours div {
   background: none;
   border: 2px solid #ffd206;
   filter: drop-shadow(0px 0px 9px #cbac20);
