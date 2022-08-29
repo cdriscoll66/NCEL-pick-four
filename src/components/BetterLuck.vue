@@ -3,10 +3,8 @@ import gsap from 'gsap';
 import { onMounted } from 'vue';
 import Logo from '../assets/pick3plusfireball-logo.png'
 
-const jackpot = new Audio('../audio/sprite/jackpot.mp3');
 
 onMounted(() => {
-
     let tl = gsap.timeline({
         repeat: 0,
         delay: 0
@@ -14,25 +12,19 @@ onMounted(() => {
 
     // fade in system
     tl.to('#hl1', {duration: .0, y: 50});
-    tl.to('#hl2', {duration: .0, y: 50});
-    tl.to('#hl3', {duration: .0, y: 50});
     tl.to('#logo', {duration: .0, y: 50});
-    tl.to('#hl2', {duration: .3, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut', onComplete: () => {
-        jackpot.play();
-    }});
+    tl.to('#hl2', {duration: .0, y: 50});
+
     tl.to ('#hl1', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
-    tl.to ('#hl2', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
-    tl.to ('#hl3', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
     tl.to ('#logo', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
+    tl.to ('#hl2', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
  });
 
 </script>
 
 <template>
 <div class="reward-wrapper">
-<div><h2 id="hl1">You won</h2></div>
-<div class="reward__amt"><h2 id="hl2">$180</h2></div>
-<div><h2 id="hl3">playing</h2></div>
+<div><h2 id="hl1">You didn't win</h2></div>
 <div><img
           width="256"
           height="102"
@@ -40,6 +32,7 @@ onMounted(() => {
           alt="Pick 3 Plus Fireball logo"
           :src="Logo"
         /></div>
+<div><h2 class="betterluck" id="hl2">Better Luck Next Time!</h2></div>
 
 
 </div>
@@ -47,9 +40,19 @@ onMounted(() => {
 
 <style scoped>
 
-#hl1, #hl2, #hl3, #logo {
+#hl1, #hl2, #logo {
     opacity: 0;
     /* transform: translateY(50px); */
+}
+
+.betterluck {
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: -.82px;
+    font-weight: 700;
+    margin: 10px;  
+    text-align: center;
+    color: var(--color-gold);
 }
 .reward-wrapper {
     position: absolute;

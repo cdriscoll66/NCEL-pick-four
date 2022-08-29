@@ -10,13 +10,9 @@ import FinalScreen from './FinalScreen.vue'
 const store = gamesStore()
 
 const state = reactive({
-    showWinner: false,
-    showReward: false,
-    showFinal: false,
+    finalScreens: 0,
     winners: [],
 })
-
-
 
 
 onMounted(() => {
@@ -28,9 +24,9 @@ onMounted(() => {
     });
 
     // fade in system
-    tl.to('#winning', {y: 50});
-    tl.to('#fireball__row', {y: 50});
-    tl.to('#picks', {y: 50});
+    tl.to('#winning', {duration: .01, y: 50});
+    tl.to('#fireball__row', {duration: .01, y: 50});
+    tl.to('#picks', {duration: .01, y: 50});
     tl.to('#fireball', {duration: .5, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut'});
     tl.to ('#winning', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
     tl.to ('#fireball__row', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
@@ -38,19 +34,16 @@ onMounted(() => {
 
     // circle numbers animation    
     tl.call(circleAnimation);
-    tl.to ('#picks', {duration: 6 });
+    tl.to ('#fireball', {duration: 6, onComplete: () => {state.finalScreens = 1} });
 
     // winner flourish
-    tl.call(flashWinner );
-
     
     // Reward screen
-    // final Screen
+    tl.to ('#fireball', {duration: 1.8, onComplete: () => {state.finalScreens = 2} });
 
-    // tl.to('#fireball', { delay: 2.5});
-    // tl.call(flashReward);
-    // tl.to('#fireball', { delay: 2.5});
-    // tl.call(showFinal);
+    // final Screen
+    tl.to ('#fireball', {duration: 6, onComplete: () => {state.finalScreens = 3} });
+
 })
 
 const circleAnimation = () => {
@@ -76,25 +69,6 @@ const bubble = () => {
   let bubble = new Audio('../audio/sprite/bubble-pop.mp3');
   bubble.play();
 }
-
-const flashWinner = () => {
-        state.showWinner = true;
-    // setTimeout(() => {
-    //     state.showWinner = false;
-    // }, 2000);
-}
-
-const flashReward = () => {
-        state.showReward = true;
-    setTimeout(() => {
-        state.showReward = false;
-    }, 2000);
-}
-
-const showFinal = () => {
-    state.showFinal = true;
-}
-
 
 const calcWinners = () => {
   if (store.presentgame == 'exact') {
@@ -146,9 +120,9 @@ const resultFireball = computed(() => {
       </div>
     </div>
   </div>
-    <WinnerFlourish v-if="state.showWinner" />
-    <RewardScreen v-if="state.showReward" />
-    <FinalScreen v-if="state.showFinal" />
+    <WinnerFlourish v-if="state.finalScreens === 1" />
+    <RewardScreen v-else-if="state.finalScreens === 2" />
+    <FinalScreen v-else-if="state.finalScreens === 3" />
 
 </template>
 
