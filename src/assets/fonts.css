@@ -48,7 +48,7 @@
 
   @font-face {
     font-family: "Odudo";
-    src: url("fonts/OdudoSlab-Bold.otf") format("opentype");
+    src: url("/fonts/OdudoSlab-Bold.otf") format("opentype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
