@@ -96,8 +96,11 @@ const chooseRules = (num) => {
     </div>
   </div>
   <div v-else-if="(store.showfireball)" class="fireball-pick">
-    {{ store.showfireball }}
     <div class="fireball-pick__container">
+        <h2>
+        Add
+        <span>Fireball?</span>
+      </h2>
       <div class="fireball__select">
         <a href @click.prevent="playFireball()">
           <img width="183" height="21" alt="Fireball" :src="Fireball" />
@@ -109,10 +112,7 @@ const chooseRules = (num) => {
           This gives you more combinations and more chances to win!
         </p>
       </div>
-      <h2>
-        Add
-        <span>Fireball?</span>
-      </h2>
+
       <div class="fireball-pick__optout">
         <a class="accent-button btn-gray" href @click.prevent="optOut">
           <div><span class="button-title">Not This Time</span></div>
@@ -244,6 +244,9 @@ h2 {
   position: absolute;
 }
 
+.fireball-pick__container h2{
+  margin-bottom: 30px;
+}
 .fireball-pick__optout .btn-gray {
   font-size: 18px;
   line-height: 22px;

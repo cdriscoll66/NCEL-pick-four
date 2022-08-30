@@ -9,6 +9,10 @@ const emit = defineEmits(['play-reward-screen']);
 </script>
 
 <template>
+  <h2 class="review">
+      Review
+      <span>your selections:</span>
+    </h2>
   <h2 v-if="(store.presentgame === 'exact')" class="game-type">Exact</h2>
   <h2 v-else-if="(store.presentgame === 'any')" class="game-type">Any</h2>
   <h2 v-else-if="(store.presentgame === 'fifty')" class="game-type">50/50</h2>
@@ -25,10 +29,7 @@ const emit = defineEmits(['play-reward-screen']);
     <img width="183" height="21" alt="Fireball" :src="Fireball" />
   </div>
   <div class="bottom">
-    <h2>
-      Review
-      <span>your selections:</span>
-    </h2>
+  
     <a href @click.prevent="emit('play-reward-screen')" class="accent-button one-line">
       <div>
         <span class="button__title">Let's Play</span>
@@ -46,8 +47,8 @@ const emit = defineEmits(['play-reward-screen']);
   margin-bottom: 30px;
 }
 
-.bottom h2 {
-  margin-left: 10px;
+.review {
+  margin: 10px;
 }
 .fireball-mark {
   display: flex;
