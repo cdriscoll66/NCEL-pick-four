@@ -22,15 +22,15 @@ main {
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--color-blue-accent);
   transition: 0.4s;
 }
 
 a.accent-button {
   padding: 8px 24px 10px;
-  background: var(--color-green-accent);
-  box-shadow: 0px 4px 0px 0px var(--color-green),
-    0px 0px 4px 0px var(--color-green);
+  background: var(--color-blue-accent);
+  box-shadow: 0px 4px 0px 0px var(--color-blue-dark),
+    0px 0px 4px 0px var(--color-blue-light);
   border-radius: 8px;
   border-width: 0;
   color: var(--vt-c-white);
@@ -52,7 +52,7 @@ a.accent-button div {
 }
 
 a.accent-button:hover {
-  background: var(--color-green-light);
+  background: var(--color-blue-light);
 }
 
 a.btn-gray:hover {
@@ -66,7 +66,7 @@ a.btn-gray:hover {
   font-size: 28px;
   line-height: 1.2;
   text-align: center;
-  text-shadow: -1px 1px 1px var(--color-green-darkest);
+  text-shadow: -1px 1px 1px var(--color-blue-shade);
 }
 
 .button__subtitle {
@@ -74,7 +74,7 @@ a.btn-gray:hover {
   line-height: 1.2;
   text-align: center;
   letter-spacing: -0.35px;
-  text-shadow: -1px 1px 1px var(--color-green-darkest);
+  text-shadow: -1px 1px 1px var(--color-blue-shade);
 }
 
 .button__subtitle:before,
@@ -103,12 +103,12 @@ button {
 
 a.small-btn {
   color: var(--vt-c-white);
-  background: var(--color-green-accent);
+  background: var(--color-blue-accent);
   font-size: 12px;
   font-weight: 700;
   font-style: italic;
-  text-shadow: -1px 1px 1px #007A3D; ;
-  box-shadow: 0px 0px 4px rgba(0, 122, 61, 0.8), inset 0px 1px 3px #0BCE65;
+  text-shadow: -1px 1px 1px var(--color-blue-light); ;
+  box-shadow: 0px 0px 4px rgba(0, 61, 122, 0.8), inset 0px 1px 3px var(--color-blue-light);
   border-radius: 8px;
   padding: 3px 12px;
 }

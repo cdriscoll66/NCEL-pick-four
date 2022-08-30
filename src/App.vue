@@ -82,19 +82,19 @@ const Music = (song) => {
       <nav>
         <RouterLink to="/">
           <span class="nav-icon">
-            <img width="26" height="24.95" alt="Home Icon" :src="HomeIcon" />
+            <img width="30" height="30" alt="Home Icon" :src="HomeIcon" />
           </span>
           <span>Home</span>
         </RouterLink>
         <RouterLink to="/tutorial">
           <span class="nav-icon">
-            <img width="26" height="24.95" alt="Learn Icon" :src="LearnIcon" />
+            <img width="30" height="30" alt="Learn Icon" :src="LearnIcon" />
           </span>
           <span>Learn</span>
         </RouterLink>
         <RouterLink class="play-icon" to="/game">
           <span class="nav-icon">
-            <img width="26" height="24.95" alt="Play Icon" :src="PlayIcon" />
+            <img width="40" height="40" alt="Play Icon" :src="PlayIcon" />
             <span class="top-left"></span>
             <span class="top-right"></span>
           </span>
@@ -102,13 +102,13 @@ const Music = (song) => {
         </RouterLink>
         <a href @click.prevent="muteToggle()">
           <span class="nav-icon">
-            <img width="26" height="24.95" alt="Mute Icon" :src="MuteIcon" />
+            <img width="30" height="30" alt="Mute Icon" :src="MuteIcon" />
           </span>
           <span>Mute</span>
         </a>
         <a href @click.prevent="exit()">
           <span class="nav-icon">
-            <img width="26" height="24.95" alt="Exit Icon" :src="CloseIcon" />
+            <img width="30" height="30" alt="Exit Icon" :src="CloseIcon" />
           </span>
           <span>Exit</span>
         </a>
@@ -129,7 +129,7 @@ header {
   height: 60px;
   line-height: 1.5;
   max-height: 100vh;
-  background: radial-gradient(442.3% 86.73% at 50% 0%, rgba(0, 156, 74, 0.3) 0%, rgba(0, 122, 61, 0.3) 100%), #009C4A;
+  background: radial-gradient(442.3% 86.73% at 50% 0%, rgba(0, 147, 199, 0.3) 0%, rgba(0, 119, 161, 0.3) 100%), #0093C7;
   background-blend-mode: multiply, normal;
   padding: 0;
 }
@@ -142,14 +142,10 @@ header {
 nav {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
-  font-size: 12px;
+  font-size: 8px;
   text-align: center;
-}
-
-nav a {
-  color: var(--vt-c-white);
 }
 
 nav a.router-link-exact-active {
@@ -164,6 +160,7 @@ nav a {
   display: flex;
   flex-flow: column nowrap;
   padding: 0 .75rem;
+  color: var(--vt-c-white);
 }
 nav a span.nav-icon {
   margin-top: 5px;
@@ -194,8 +191,16 @@ nav a:first-of-type {
   margin: 0 6px -25px;
   padding: 6px 10px 8px !important;
   border-radius: 0 0 20px 20px;
-  background-color: var(--color-green-light);
   position: relative;
+  background: #41B0D9;
+  box-shadow: 0px 0px 4px rgba(0, 88, 120, 0.82), inset 0px 1px 3px #0093C7, inset 0px 1px 3px #0EBCFC;
+}
+
+.play-icon span {
+  font-size: 12px;
+  font-weight: 700;
+  font-style: italic;
+  margin-top: 5px;
 }
 
 .top-right,
@@ -204,7 +209,7 @@ nav a:first-of-type {
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: var(--color-green-light);
+  background-color: var(--color-blue-light);
   display: none !important; /* hiding for now. */
 }
 

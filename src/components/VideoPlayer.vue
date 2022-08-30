@@ -40,6 +40,6 @@ z-index: -1;
 top: -40px;
 left: 0;
 width: 100%;
-background-color: var(--color-green-darkest);
+background-color: var(--color-blue-shade);
 }
 </style>

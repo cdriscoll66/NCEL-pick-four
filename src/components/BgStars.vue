@@ -1,9 +1,9 @@
 <script setup>
 import YellowStars from '../assets/background-stars.svg'
-import GreenStars from '../assets/background-stars--green.svg'
-const props = defineProps(['green', 'gray'], {
+import GreenStars from '../assets/background-stars--blue.svg'
+const props = defineProps(['blue', 'gray'], {
   default: {
-    green: false,
+    blue: false,
     gray: false,
   },
 })
@@ -12,7 +12,7 @@ const props = defineProps(['green', 'gray'], {
 <template>
   <div
     class="bg-stars__cover"
-    :class="{ green: props.green, gray: props.gray }"
+    :class="{ blue: props.blue, gray: props.gray }"
   >
     <div class="bg-stars__inner">
       <div class="bg-stars__stars"></div>
@@ -64,7 +64,7 @@ const props = defineProps(['green', 'gray'], {
   background-blend-mode: color-burn;
 }
 
-.green > .bg-stars__inner::after {
+.blue > .bg-stars__inner::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -86,17 +86,13 @@ const props = defineProps(['green', 'gray'], {
   background-image: url(../assets/background-stars.svg);
 }
 
-.green .bg-stars__stars {
-  background-image: url(../assets/background-stars--green.svg);
+.blue .bg-stars__stars {
+  background-image: url(../assets/background-stars--blue.svg);
 }
 
-.green.bg-stars__cover {
-  background-color: rgba(0, 122, 61);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 122, 61) 0%,
-    rgba(0, 61, 31) 57.87%
-  );
+.blue.bg-stars__cover {
+  background-color: #0093C7;
+  background: linear-gradient(180deg, rgba(0, 147, 199, 0.6) 0%, rgba(0, 45, 61, 0.6) 57.87%);
 }
 
 .gray .bg-stars__stars {

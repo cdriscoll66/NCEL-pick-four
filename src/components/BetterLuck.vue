@@ -1,7 +1,7 @@
 <script setup>
 import gsap from 'gsap';
 import { onMounted } from 'vue';
-import Logo from '../assets/pick3plusfireball-logo.png'
+import Logo from '../assets/pick-4-logo.png'
 
 
 onMounted(() => {

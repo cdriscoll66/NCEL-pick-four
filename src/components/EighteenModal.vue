@@ -50,7 +50,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-green-darkest);
+  background-color: var(--color-blue-shade);
   z-index: 3;
   padding: 50px 30px 0 30px;
 }

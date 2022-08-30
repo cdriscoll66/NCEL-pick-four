@@ -34,7 +34,7 @@ const playRewardScreen = () => {
             <Winner v-if="store.fireballselected" />
             <ShouldaFireballed v-else/>
           </div> 
-      <BgStars green="true"/>
+      <BgStars blue="true"/>
     </div>
   </div>
 </template>

@@ -241,7 +241,7 @@ const handleToc = (i) => {
   color: var(--vt-c-white);
 }
 .progress-bar {
-  background-color: var(--color-green-darkest);
+  background-color: var(--color-blue-shade);
 }
 
 h1 {

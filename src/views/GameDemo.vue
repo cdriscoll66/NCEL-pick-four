@@ -88,7 +88,7 @@ onMounted(() => {
       </div>
     </div>
     <ProTip v-show="(state.showProTip)" @close="closeProTip" />
-    <BgStars green="true" />
+    <BgStars blue="true" />
   </main>
 </template>
 

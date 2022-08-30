@@ -81,7 +81,7 @@ const emit = defineEmits(['close']);
   height: 100%;
   z-index: 1;
   overflow-y: scroll;
-  background-color: var(--color-green-darkest)
+  background-color: var(--color-blue-shade)
 }
 
 .modal__content {

@@ -29,7 +29,7 @@ const props = defineProps(['tuts'])
   padding: 0 10px;
   position: absolute;
   z-index: 99999;
-  background-color: var(--color-green-darkest);
+  background-color: var(--color-blue-shade);
 }
 
 .progress-bar {
