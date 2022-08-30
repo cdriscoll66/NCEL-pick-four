@@ -11,19 +11,34 @@ const emit = defineEmits(['music', 'musicplaypause'])
 
 const store = gamesStore()
 
+let click = new Audio('../audio/sprite/button_click.mp3');
+
+const btnClick = () => {
+    click.currentTime = 0;
+    click.play();
+}
+
 const state = reactive({
   showProTip: false,
 })
 
 const closeModal = () => {
+  btnClick();
   store.confirmEighteen()
 }
 
 const closeProTip = () => {
+  btnClick();
   state.showProTip = false
 }
 
+const openProTip = () => {
+  btnClick();
+  state.showProTip = true
+}
+
 const chooseGame = (game) => {
+  btnClick();
   store.setPresentGame(game)
 }
 
@@ -31,7 +46,7 @@ onMounted(() => {
   emit('music', 'audio/FunkyInFunky.mp3')
   store.setPresentGame(null)
   store.resetPicksAndFireball()
-});
+})
 </script>
 
 <template>
@@ -40,44 +55,46 @@ onMounted(() => {
       v-if="(!store.iseighteen)"
       @confirm-yes="closeModal"
     ></EighteenModal>
-      
-      <div v-if="(store.presentgame)" class="game-exact">
-      <GameFrame @protip="state.showProTip = true"></GameFrame>
-      </div>
-    
-      <div v-else class="game-select">
 
-        <div class="btn-row">
-          <a class="small-btn" href @click.prevent="state.showProTip = true">Pro Tip</a>
-          <a class="small-btn" href="https://www.yahoo.com" target="_blank">Prizes & Odds</a>
-          
+    <div v-if="(store.presentgame)" class="game-exact">
+      <GameFrame @protip="state.showProTip = true"></GameFrame>
+    </div>
+
+    <div v-else class="game-select">
+      <div class="btn-row">
+        <a class="small-btn" href @click.prevent="openProTip">
+          Pro Tip
+        </a>
+        <a class="small-btn" href="https://www.yahoo.com" target="_blank">
+          Prizes & Odds
+        </a>
+      </div>
+      <div class="game-select__container">
+        <h2>
+          Select
+          <span>Play Type:</span>
+        </h2>
+        <div class="game-select__list">
+          <a href @click.prevent="chooseGame('exact')">Exact</a>
+          <a href @click.prevent="chooseGame('any')">Any</a>
+          <a href @click.prevent="chooseGame('fifty')">50/50</a>
         </div>
-              <div class="game-select__container">
-      <div class="game-select__list">
-        <a href @click.prevent="chooseGame('exact')">Exact</a>
-        <a href @click.prevent="chooseGame('any')">Any</a>
-        <a href @click.prevent="chooseGame('fifty')">50/50</a>
-      </div>
-      <div class="info-point">
-        <p>
-          There are LOTS of way to play Pick 3. Try a popular option above, then
-          explore the rest at NCLottery.com.
-        </p>
-      </div>
-      <h2>
-        Select
-        <span>Play Type:</span>
-      </h2>
+        <div class="info-point">
+          <p>
+            There are LOTS of way to play Pick 3. Try a popular option above,
+            then explore the rest at NCLottery.com.
+          </p>
+        </div>
       </div>
     </div>
-    <ProTip v-show="(state.showProTip)"  @close="closeProTip"/>
+    <ProTip v-show="(state.showProTip)" @close="closeProTip" />
     <BgStars green="true" />
   </main>
 </template>
 
 <style>
-
-.game-select, .game-exact {
+.game-select,
+.game-exact {
   height: 100%;
 }
 
@@ -89,20 +106,25 @@ onMounted(() => {
   z-index: 1;
 }
 
-.game-select__container, .rules-select__container {
+.game-select__container,
+.rules-select__container {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   height: 100%;
 }
 
-.game-select__list, .rules-select__list {
+.game-select__list,
+.rules-select__list {
   display: flex;
   flex-flow: column nowrap;
+  margin-left: 7.5%;
+  margin-right: 7.5%;
 }
 
-.game-select__list a, .rules-select__list a {
+.game-select__list a,
+.rules-select__list a {
   display: flex;
   flex-flow: row nowrap;
   font-size: 24px;
@@ -112,9 +134,11 @@ onMounted(() => {
   margin-bottom: 30px;
 }
 
-.game-select__list a::before, .rules-select__list a::before {
+.game-select__list a::before,
+.rules-select__list a::before {
   content: '';
   display: block;
+  min-width: 39px;
   width: 39px;
   height: 39px;
   background-color: var(--vt-c-white);
@@ -139,7 +163,7 @@ h2 span {
 
 .info-point {
   display: flex;
-  margin: 30px auto;
+  margin: 20px auto;
   width: 240px;
 }
 
