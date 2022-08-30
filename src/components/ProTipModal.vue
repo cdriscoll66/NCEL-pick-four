@@ -2,6 +2,8 @@
 import BgStars from '../components/BgStars.vue'
 import { gamesStore } from '@/store/GamesStore'
 import Fireball from '../assets/fireball.png'
+import X from '../assets/x-protip.svg'
+
 
 const store = gamesStore()
 
@@ -15,14 +17,17 @@ const emit = defineEmits(['close']);
     <div class="modal__content">
       <div class="close">
         <a href class="small-btn" @click.prevent="emit('close')">
-          Close Pro Tip
+          <img :src="X" alt="close" />Close Pro Tip
         </a>
       </div>
       <div v-if="(store.showfireball)" class="modal__text">
           <img width="183" height="21" alt="Fireball" :src="Fireball" />
-          <h2 class="highlighted">Fireball wins are prizes <span>in addition to </span>any other Pick 3 wins.</h2>
+          <h2 class="highlighted">Use <span>“Quick Pick”</span> to have your numbers randomly selected.
+</h2>
       </div>
-      <div v-else class="modal__text">
+
+
+      <div v-else-if="(store.presentgame === null)" class="modal__text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -53,7 +58,16 @@ const emit = defineEmits(['close']);
           Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
         </p>
       </div>
-      <BgStars green="true"></BgStars>
+
+
+      <div v-else class="modal__text">
+      <div class="quick-pick">
+      <span>Quick Pick</span>
+        </div>
+      <h2 class="highlighted">Use <span>“Quick Pick”</span> to have your numbers randomly selected.
+</h2>      </div>
+
+      
     </div>
   </div>
 </template>
@@ -67,6 +81,7 @@ const emit = defineEmits(['close']);
   height: 100%;
   z-index: 1;
   overflow-y: scroll;
+  background-color: var(--color-green-darkest)
 }
 
 .modal__content {
@@ -99,5 +114,30 @@ h2.highlighted {
 
 h2.highlighted span {
   color: var(--color-gold);
+}
+
+.quick-pick {
+  display: flex;
+}
+
+.quick-pick span {
+  margin-right: 24px;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: -1px 1px 4px rgba(0, 61, 31, 0.75);
+  color: var(--vt-c-white);
+  display: flex;
+  align-items: center;
+}
+
+.quick-pick span::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 40px;
+  background-color: var(--vt-c-white);
+  border-radius: 3.94px;
+  border: 1px solid var(--color-fireball-red);
+  margin-right: 12px;
 }
 </style>

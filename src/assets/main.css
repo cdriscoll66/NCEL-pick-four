@@ -112,3 +112,8 @@ a.small-btn {
   border-radius: 8px;
   padding: 3px 12px;
 }
+
+.small-btn img {
+  margin-right: 5px;
+  vertical-align: text-top;
+}

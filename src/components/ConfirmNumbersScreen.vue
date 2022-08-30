@@ -45,6 +45,10 @@ const emit = defineEmits(['play-reward-screen']);
   justify-content: flex-end;
   margin-bottom: 30px;
 }
+
+.bottom h2 {
+  margin-left: 10px;
+}
 .fireball-mark {
   display: flex;
   align-items: center;
