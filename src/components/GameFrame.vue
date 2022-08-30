@@ -8,9 +8,12 @@ const emit = defineEmits(['music', 'musicplaypause', 'protip'])
 
 const store = gamesStore()
 
-let click = new Audio('../audio/sprite/button_click.mp3');
+let click = new Audio('../audio/sprite/button_click.mp3')
 
- 
+const btnClick = () => {
+  click.currentTime = 0
+  click.play()
+}
 
 const numberSelection = (num, slot) => {
   if (store.presentrules == 1) {
@@ -20,25 +23,23 @@ const numberSelection = (num, slot) => {
       store.selectNum(num, 0)
       store.selectNum(num, 1)
     } else {
-      store.selectNum(num, 2);
+      store.selectNum(num, 2)
     }
-  }
-    else {
+  } else {
     store.selectNum(num, slot)
   }
 }
 
 const quickPick = () => {
   // generate an array of 3 integers between 0 and 9 but they must be unique.
-  click.currentTime = 0;
-  click.play();
+  btnClick()
   if (store.presentrules == 0) {
-    store.randomNums();
+    store.randomNums()
   } else if (store.presentrules == 1) {
     let num = Math.floor(Math.random() * 10)
     store.setSame(num)
   } else if (store.presentrules == 2) {
-    store.randomTwoNums();
+    store.randomTwoNums()
   }
 }
 
@@ -60,7 +61,6 @@ const optOut = () => {
   store.showResults()
 }
 
-
 const nextGame = () => {
   store.hideResults()
   store.resetPicksandFireball()
@@ -68,12 +68,9 @@ const nextGame = () => {
 }
 
 const chooseRules = (num) => {
-  click.currentTime = 0;
-  click.play();
+  btnClick()
   store.setPresentRules(num)
 }
-
-
 </script>
 
 <template>
@@ -86,12 +83,20 @@ const chooseRules = (num) => {
   <div v-if="(store.presentrules === null)" class="rules-select__container">
     <div class="rules-select__list">
       <a href @click.prevent="chooseRules(0)">Pick Different Numbers</a>
-      <a v-if="(store.presentgame == 'exact')" href @click.prevent="chooseRules(1)">Pick all the Same number</a>
-      <a v-else href @click.prevent="chooseRules(2)">Pick 2 the same and one different</a>
+      <a
+        v-if="(store.presentgame == 'exact')"
+        href
+        @click.prevent="chooseRules(1)"
+      >
+        Pick all the Same number
+      </a>
+      <a v-else href @click.prevent="chooseRules(2)">
+        Pick 2 the same and one different
+      </a>
     </div>
   </div>
   <div v-else-if="(store.showfireball)" class="fireball-pick">
-  {{ store.showfireball}}
+    {{ store.showfireball }}
     <div class="fireball-pick__container">
       <div class="fireball__select">
         <a href @click.prevent="playFireball()">
@@ -99,62 +104,69 @@ const chooseRules = (num) => {
         </a>
       </div>
       <div class="play-note info-point">
-      <p>With the Fireball, you can replace any number drawn by the lottery. This gives you more combinations and more chances to win!</p>
-    </div>
-    <h2>Add<span> Fireball?</span></h2>
-    <div class="fireball-pick__optout">
-      <a class="accent-button btn-gray" href @click.prevent="optOut">Not this time</a>
-    </div>
+        <p>
+          With the Fireball, you can replace any number drawn by the lottery.
+          This gives you more combinations and more chances to win!
+        </p>
+      </div>
+      <h2>
+        Add
+        <span>Fireball?</span>
+      </h2>
+      <div class="fireball-pick__optout">
+        <a class="accent-button btn-gray" href @click.prevent="optOut">
+          <div><span class="button-title">Not This Time</span></div>
+        </a>
+      </div>
     </div>
   </div>
   <div class="game" v-else>
-    <GameBoard
-      @select-num="numberSelection"
-    ></GameBoard>
+    <h2>
+      {{ store.gamerules[store.presentrules].instructions1 }}
+      <br /><span>{{ store.gamerules[store.presentrules].instructions2 }}</span>
+    </h2>
+
+    <GameBoard @select-num="numberSelection"></GameBoard>
 
     <div class="quick-pick">
       <a href @click.prevent="quickPick">Quick Pick</a>
     </div>
 
-  
-
-    <div  class="bottom play">
+    <div class="bottom play">
       <div class="play-note info-point">
-      <p>{{ store.gamerules[store.presentrules].gamenote }}</p>
-    </div>
-      <a v-show="!store.picks.includes(null)" href class="accent-button" @click.prevent="queryFireball()">Play!</a>
+        <p>{{ store.gamerules[store.presentrules].gamenote }}</p>
+      </div>
+      <a
+        v-show="!store.picks.includes(null)"
+        href
+        class="accent-button one-line"
+        @click.prevent="queryFireball()"
+      >
+        <span class="button__title">Play!</span>
+      </a>
     </div>
 
-    <h2>
-      {{ store.gamerules[store.presentrules].instructions1 }}
-      <span>{{ store.gamerules[store.presentrules].instructions2 }}</span>
-    </h2>
-
-    <PlayResults
-      v-if="(store.showresults)"
-      @next-game="nextGame"
-    ></PlayResults>
+    <PlayResults v-if="(store.showresults)" @next-game="nextGame"></PlayResults>
   </div>
 </template>
 
 <style scoped>
-
 .game {
   height: calc(100% - 90px);
   display: flex;
   flex-flow: column nowrap;
-  margin: 40px 10px;
+  margin: 20px 10px;
 }
-
 
 .quick-pick {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 10px 8px 0;
+  margin: 0;
 }
 
-.quick-pick a, .fireball__select a {
+.quick-pick a,
+.fireball__select a {
   margin-right: 24px;
   font-weight: bold;
   font-size: 20px;
@@ -164,7 +176,8 @@ const chooseRules = (num) => {
   align-items: center;
 }
 
-.quick-pick a::before, .fireball__select a::before {
+.quick-pick a::before,
+.fireball__select a::before {
   content: '';
   display: block;
   width: 30px;
@@ -176,11 +189,19 @@ const chooseRules = (num) => {
 }
 
 h2 {
+  
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--vt-c-white);
   text-align: center;
   margin-top: 10px;
+}
+
+.game h2 {
+  font-size: 28px;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .bottom {
@@ -191,8 +212,16 @@ h2 {
   flex-grow: 1;
 }
 
-.play-note, .play-note p {
-  margin-bottom: 0;
+.play-note,
+.play-note p
+{
+  margin-top: 5;
+  margin-bottom: 5px;
+}
+
+.play a.one-line {
+  margin-top: 0;
+  text-align: center;
 }
 
 .fireball-pick {
@@ -213,5 +242,15 @@ h2 {
   height: 100%;
   color: var(--vt-c-white);
   position: absolute;
+}
+
+.fireball-pick__optout .btn-gray {
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.35px;
+  text-shadow: -1px 1px 1px #535353;
+  font-style: italic;
+  min-width: unset;
+  padding: 12px 32px;
 }
 </style>

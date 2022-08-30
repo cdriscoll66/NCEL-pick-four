@@ -11,6 +11,7 @@ const store = gamesStore()
 const state = reactive({
     finalScreens: 0,
     winners: [],
+    fireball: null
 })
 
 const failsound = new Audio('../audio/sprite/gamefail.mp3');
@@ -45,11 +46,33 @@ const circleAnimation = () => {
      let tl1 = gsap.timeline({
         repeat: 0,
     });
-      tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+  
+if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+    tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-2 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#number-1', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-0 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+       // fireball fail
+    tl1.to('#number-2', {duration: 1, onComplete: () => {failsound.play()}});
+
+    }  else if (store.presentgame === 'exact')  {
+    tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
     tl1.to('#number-1', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+           // fireball fail
     tl1.to('#number-2', {duration: 1, onComplete: () => {failsound.play()}});
+
+    } else {
+    tl1.to('#number-1', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#number-0', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+          // fireball fail
+    tl1.to('#number-2', {duration: 1, onComplete: () => {failsound.play()}});
+
+    }
+
 }
 
 
@@ -61,17 +84,21 @@ const bubble = () => {
 }
 
 const calcWinners = () => {
-  if (store.presentgame == 'exact') {
+  if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+    state.winners = [store.picks[2], store.picks[1], store.fireball]
+    state.fireball = store.picks[0]
+  }
+  else if (store.presentgame == 'exact') {
     state.winners = [store.picks[0], store.picks[1], store.fireball]
+    state.fireball = store.picks[2]
   }
   else {
     state.winners = [store.picks[1], store.picks[0], store.fireball]
+    state.fireball = store.picks[2]
   }
 }
 
-const resultFireball = computed(() => {
-  return store.picks[2]
-});
+
 </script>
 
 <template>

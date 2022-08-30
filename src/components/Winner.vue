@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { gamesStore } from '@/store/GamesStore'
 import gsap from 'gsap'
 import Fireball from '../assets/fireball.png'
@@ -12,6 +12,7 @@ const store = gamesStore()
 const state = reactive({
     finalScreens: 0,
     winners: [],
+    fireball: null
 })
 
 
@@ -39,7 +40,7 @@ onMounted(() => {
     // winner flourish
     
     // Reward screen
-    tl.to ('#fireball', {duration: 1.8, onComplete: () => {state.finalScreens = 2} });
+    tl.to ('#fireball', {duration: 4.8, onComplete: () => {state.finalScreens = 2} });
 
     // final Screen
     tl.to ('#fireball', {duration: 6, onComplete: () => {state.finalScreens = 3} });
@@ -50,20 +51,40 @@ const circleAnimation = () => {
      let tl1 = gsap.timeline({
         repeat: 0,
     });
-      tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+
+    if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+    tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-2 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#number-1', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-0 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+       // fireball cover last number
+    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
+    tl1.to('#fireball', {duration: 1, x:120, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
+    tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+    }  else if (store.presentgame === 'exact')  {
+    tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
     tl1.to('#number-1', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
-
-    // fireball cover last number
+       // fireball cover last number
     tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
-    tl1.to('#fireball', {duration: 1, x:120, y:-206.5, rotate: 0, delay: .5,  ease: 'bounce.out'});
+    tl1.to('#fireball', {duration: 1, x:120, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
     tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-2 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+    } else {
+    tl1.to('#number-1', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#number-0', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+       // fireball cover last number
+    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
+    tl1.to('#fireball', {duration: 1, x:120, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
+    tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
+    tl1.to('#pick-2 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
+
+    }
 }
-
-
-
 
 const bubble = () => {
   let bubble = new Audio('../audio/sprite/bubble-pop.mp3');
@@ -71,17 +92,20 @@ const bubble = () => {
 }
 
 const calcWinners = () => {
-  if (store.presentgame == 'exact') {
+  if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+    state.winners = [store.picks[2], store.picks[1], store.fireball]
+    state.fireball = store.picks[0]
+  }
+  else if (store.presentgame == 'exact') {
     state.winners = [store.picks[0], store.picks[1], store.fireball]
+    state.fireball = store.picks[2]
   }
   else {
     state.winners = [store.picks[1], store.picks[0], store.fireball]
+    state.fireball = store.picks[2]
   }
 }
 
-const resultFireball = computed(() => {
-  return store.picks[2]
-});
 </script>
 
 <template>
@@ -106,7 +130,7 @@ const resultFireball = computed(() => {
         <img width="183" height="21" alt="Fireball" :src="Fireball" />
       </div>
       <div id="fireball" class="number fireball">
-        <div>{{ resultFireball }}</div>
+        <div>{{ state.fireball }}</div>
       </div>
     </div>
     <div id="picks" class="picks__row">
