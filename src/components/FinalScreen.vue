@@ -32,7 +32,7 @@ const resetGame = () => {
       </div>
     </a>
     </div>
-<p>Game Demos are for educational purposes only and do not represent actual odds of winning. Wininng in this experience does not convey any prizes or cash value. There may be some minor variations between the demo game and the actual game. The North Carolina Lottery Pick 3 game play is subject to NCEL game Rules</p>
+<p>Game Demos are for educational purposes only and do not represent actual odds of winning. Wininng in this experience does not convey any prizes or cash value. There may be some minor variations between the demo game and the actual game. The North Carolina Lottery Pick 4 game play is subject to NCEL game Rules</p>
 
 
 </div>

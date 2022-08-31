@@ -106,7 +106,7 @@ const calcWinners = () => {
     <div id="winning" class="winning-numbers__row">
       <div class="title">
         <h3>
-          Pick 3:
+          4:
           <span>Winning Numbers</span>
         </h3>
       </div>

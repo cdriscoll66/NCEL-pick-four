@@ -4,8 +4,8 @@ import gsap from 'gsap';
 import BgStars from '../components/BgStars.vue';
 import Sphere from '../components/Sphere.vue';
 import { useRouter, useRoute } from 'vue-router';
-import Greenstar from '../assets/star-green.svg';
-import Higreenstar from '../assets/star-higreen.svg';
+import Bluestar from '../assets/star-blue.svg';
+import HiBluestar from '../assets/star-hiblue.svg';
 import Goldstar from '../assets/star-gold.svg';
 import { ClickSound } from '../composables/sfx';
 
@@ -46,12 +46,12 @@ const onLeave = (path) => {
       loadOutTL.to('#demobtn', { delay: -0.2, duration: 0.2, opacity: 0 });
       loadOutTL.to('.sphere', { delay: -0.1, duration: 0.5, scale: 0 });
       loadOutTL.to('.transition-stars', { delay: 0, duration: 0, opacity: 1 });
-      loadOutTL.to('.star__green', { delay: 0, duration: 0, opacity: 1 });
+      loadOutTL.to('.star__blue', { delay: 0, duration: 0, opacity: 1 });
       loadOutTL.to('.star__gold', { delay: 0, duration: 0, opacity: 1 });
-      loadOutTL.to('.star__higreen', { delay: 0, duration: 0, opacity: 1 });
-      loadOutTL.to('.star__green', { delay: 0, duration: 1.1, scale: 45, ease: 'expo.in' });
+      loadOutTL.to('.star__hiblue', { delay: 0, duration: 0, opacity: 1 });
+      loadOutTL.to('.star__blue', { delay: 0, duration: 1.1, scale: 45, ease: 'expo.in' });
       loadOutTL.to('.star__gold', { delay: -0.8, duration: 0.75, scale: 45, ease: 'expo.in' });
-      loadOutTL.to('.star__higreen', { delay: -0.5, duration: 0.6, scale: 45, ease: 'expo.in' });
+      loadOutTL.to('.star__hiblue', { delay: -0.5, duration: 0.6, scale: 45, ease: 'expo.in' });
       loadOutTL.call(changePage);
 
   function changePage() {
@@ -90,9 +90,9 @@ const onLeave = (path) => {
       </p>
     </div>
     <div class="transition-stars">
-    <img class="transition-stars__star star__green" width="124.4" height="124.4" :src=Greenstar alt="star">
+    <img class="transition-stars__star star__blue" width="124.4" height="124.4" :src=Bluestar alt="star">
     <img class="transition-stars__star star__gold" width="124.4" height="124.4" :src=Goldstar alt="star">
-    <img class="transition-stars__star star__higreen" width="124.4" height="124.4" :src=Higreenstar alt="star">
+    <img class="transition-stars__star star__hiblue" width="124.4" height="124.4" :src=HiBluestar alt="star">
     </div>
   </main>
   <BgStars />
@@ -143,7 +143,7 @@ const onLeave = (path) => {
   transform: scale(0);
 }
 
-.star__green, .star__gray, .star__gold, .star__higreen {
+.star__blue, .star__gray, .star__gold, .star__hiblue {
   opacity: 0;
 }
 </style>

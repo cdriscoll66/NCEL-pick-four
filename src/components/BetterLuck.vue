@@ -29,7 +29,7 @@ onMounted(() => {
           width="256"
           height="102"
           id="logo"
-          alt="Pick 3 Plus Fireball logo"
+          alt="Pick 4 Plus Fireball logo"
           :src="Logo"
         /></div>
 <div><h2 class="betterluck" id="hl2">Better Luck Next Time!</h2></div>

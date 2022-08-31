@@ -76,7 +76,7 @@ onMounted(() => {
         </div>
         <div class="info-point">
           <p>
-            There are LOTS of way to play Pick 3. Try a popular option above,
+            There are LOTS of way to play Pick 4. Try a popular option above,
             then explore the rest at NCLottery.com.
           </p>
         </div>

@@ -16,7 +16,7 @@ const emit = defineEmits(['play-reward-screen']);
   <h2 v-if="(store.presentgame === 'exact')" class="game-type">Exact</h2>
   <h2 v-else-if="(store.presentgame === 'any')" class="game-type">Any</h2>
   <h2 v-else-if="(store.presentgame === 'fifty')" class="game-type">50/50</h2>
-  <h2 v-else class="game-type">Pick 3</h2>
+  <h2 v-else class="game-type">Pick 4</h2>
   <div class="picks">
     <div class="pick" v-for="(pick, i) in store.picks">
       <div v-for="(n, index) in 10" :key="index">
