@@ -63,7 +63,7 @@ onMounted(() => {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
-    background-color: rgba(0, 61, 31, .9);
+    background-color: rgba(0, 88, 120, .9);
     color: var(--vt-c-white);
     align-items: center;
     z-index: 100;

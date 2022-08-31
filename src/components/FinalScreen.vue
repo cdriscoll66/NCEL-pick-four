@@ -2,10 +2,12 @@
 
 import { gamesStore } from '@/store/GamesStore'
 import { RouterLink } from 'vue-router'
+import { ClickSound } from '../composables/sfx';
 
 const store = gamesStore()
 
 const resetGame = () => {
+  ClickSound()
   store.resetPicksAndFireball()
   store.setPresentGame(null)
 }
@@ -21,11 +23,11 @@ const resetGame = () => {
         <span class="button__title">Play Again</span>
       </div>
     </a>
-                <RouterLink to="/tutorial" class="accent-button one-line">
+      <RouterLink to="/tutorial" class="accent-button one-line">
       <div>
         <span class="button__title">Learn the Game</span>
       </div>
-                </RouterLink>
+        </RouterLink>
         <a href="https://www.yahoo.com" target="_blank" class="accent-button one-line">
       <div>
         <span class="button__title">Buy Online</span>
