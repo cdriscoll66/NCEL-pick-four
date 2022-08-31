@@ -7,6 +7,7 @@ import { useRouter, useRoute } from 'vue-router';
 import Greenstar from '../assets/star-green.svg';
 import Higreenstar from '../assets/star-higreen.svg';
 import Goldstar from '../assets/star-gold.svg';
+import { ClickSound } from '../composables/sfx';
 
 const router = useRouter();
 const route = useRoute();
@@ -26,7 +27,7 @@ onMounted(() => {
 let click = new Audio('../audio/sprite/button_click.mp3');
 
 const onLeave = (path) => {
-  click.play();
+  ClickSound();
   setTimeout (() => {
   if(path == 'tutorial') {
       emit('music', '/audio/3FunkShortVersion.mp3')
