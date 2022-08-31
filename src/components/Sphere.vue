@@ -58,7 +58,7 @@ onMounted(() => {
           width="135"
           height="53"
           id="logo"
-          alt="Pick 3 Plus Fireball logo"
+          alt="Pick 4 Plus Fireball logo"
           :src="Logo"
         />
       </div>
@@ -107,7 +107,7 @@ onMounted(() => {
   text-align: center;
   font-size: 24px;
   line-height: 0.923;
-  color: var(--color-green);
+  color: var(--color-blue-dark);
   font-weight: 900;
   display: flex;
   justify-content: center;
