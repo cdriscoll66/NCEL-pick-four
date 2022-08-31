@@ -14,8 +14,6 @@ const selectNum = (num, slot) => {
     emit('select-num', num, slot);
 };
 
-
-
 </script>
 
 <template>
@@ -74,7 +72,7 @@ const selectNum = (num, slot) => {
   justify-content: center;
   align-items: center;
   gap: 6px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .picks button {

@@ -8,7 +8,7 @@ export const gamesStore = defineStore('games', {
         showfireball: false,
         showresults: false,
         fireballselected: false,
-        picks: [null, null, null],
+        picks: [null, null, null, null],
         fireball: null,
         presentgame: null,
         presentrules: null,
@@ -30,7 +30,7 @@ export const gamesStore = defineStore('games', {
             {
             id: 2,
             instructions1: 'For this game,',
-            instructions2: 'choose two of the same and one that is different.',
+            instructions2: 'Choose two of the same and 2 that are different.',
             gamenote:
                 'Explainer text about having different numbers across the board...',
             },
@@ -59,7 +59,7 @@ export const gamesStore = defineStore('games', {
             this.fireballselected = false
         },
         resetPicksAndFireball() {
-            this.picks = [null, null, null]
+            this.picks = [null, null, null, null]
             this.fireball = null
             this.showresults = false
             this.presentrules = null
@@ -71,7 +71,7 @@ export const gamesStore = defineStore('games', {
             this.picks[slot] = num
         },
         setSame(num) {
-            this.picks = [num, num, num]
+            this.picks = [num, num, num, num]
         },
         genFireball() {
             let num = Math.floor(Math.random() * 10)
@@ -88,7 +88,7 @@ export const gamesStore = defineStore('games', {
               }
               const randomArray = () => {
                 const arr = []
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < 4; i++) {
                   let num = random()
                   while (arr.includes(num)) {
                     num = random()
@@ -106,7 +106,7 @@ export const gamesStore = defineStore('games', {
               }
               const randomArray = () => {
                 const arr = []
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 3; i++) {
                   let num = random()
                   while (arr.includes(num)) {
                     num = random()
