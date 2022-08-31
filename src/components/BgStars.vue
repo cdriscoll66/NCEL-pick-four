@@ -71,7 +71,18 @@ const props = defineProps(['blue', 'gray'], {
   width: 100%;
   height: 100%;
   content: '';
-  background: linear-gradient(180deg, rgba(0, 61, 31, 1) 15%, rgba(0, 61, 31, 0.5) 25%, rgba(0, 61, 31, 0) 35%);
+  background: linear-gradient(0, rgba(0, 45, 61, 0) 50%, rgba(0, 45, 61, 0.25) 65%, #002D3D 90%);
+}
+
+.blue > .bg-stars__inner::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  background: linear-gradient(180deg, rgba(0, 147, 199, 0.6) 0%, rgba(0, 45, 61, 0.6) 57.87%);
+  mix-blend-mode: darken;
 }
 
 .bg-stars__stars {
@@ -92,7 +103,6 @@ const props = defineProps(['blue', 'gray'], {
 
 .blue.bg-stars__cover {
   background-color: #0093C7;
-  background: linear-gradient(180deg, rgba(0, 147, 199, 0.6) 0%, rgba(0, 45, 61, 0.6) 57.87%);
 }
 
 .gray .bg-stars__stars {
