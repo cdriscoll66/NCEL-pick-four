@@ -15,11 +15,13 @@ const numberSelection = (num, slot) => {
   if (store.presentrules == 1) {
     store.setSame(num)
   } else if (store.presentrules == 2) {
-    if (slot == 0 || slot == 1) {
+    if (slot == 0 || slot == 1 || slot == 2) {
       store.selectNum(num, 0)
       store.selectNum(num, 1)
-    } else {
       store.selectNum(num, 2)
+
+    } else {
+      store.selectNum(num, 3)
     }
   } else {
     store.selectNum(num, slot)
@@ -90,7 +92,7 @@ const chooseRules = (num) => {
         Pick all the Same number
       </a>
       <a v-else href @click.prevent="chooseRules(2)">
-        Pick 2 the same and one different
+        Pick 3 of the same and one different
       </a>
     </div>
   </div>

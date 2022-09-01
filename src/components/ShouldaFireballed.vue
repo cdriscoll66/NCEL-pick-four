@@ -51,7 +51,7 @@ if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
     tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});  
     tl1.to('#number-1', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
-    tl1.to('#pick-2 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
+    tl1.to('#pick-1 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});
     tl1.to('#number-2', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-3 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
        // fireball fail

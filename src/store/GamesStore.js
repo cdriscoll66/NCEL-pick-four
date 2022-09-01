@@ -23,14 +23,14 @@ export const gamesStore = defineStore('games', {
             {
             id: 1,
             instructions1: 'Select Your Numbers,',
-            instructions2: 'All three numbers should be the same.',
+            instructions2: 'All four numbers should be the same.',
             gamenote:
                 'Explainer text about having to select the exact same number across the board...',
             },
             {
             id: 2,
             instructions1: 'For this game,',
-            instructions2: 'Choose two of the same and 2 that are different.',
+            instructions2: 'Choose three of the same and 1 that is different.',
             gamenote:
                 'Explainer text about having different numbers across the board...',
             },
@@ -106,7 +106,7 @@ export const gamesStore = defineStore('games', {
               }
               const randomArray = () => {
                 const arr = []
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < 2; i++) {
                   let num = random()
                   while (arr.includes(num)) {
                     num = random()
@@ -116,7 +116,7 @@ export const gamesStore = defineStore('games', {
                 return arr
               }
               let arr = randomArray()
-              arr.unshift(arr[0]);
+              arr.unshift(arr[0], arr[0]);
               this.picks = arr;         
         },
         showResults() {
