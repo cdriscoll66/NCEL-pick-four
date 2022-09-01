@@ -75,7 +75,8 @@ const chooseRules = (num) => {
 </script>
 
 <template>
-  <div class="btn-row">
+  <div class="btn-row" v-if="(store.presentrules === null && store.gamerules)"></div>
+  <div class="btn-row" v-else>
     <a class="small-btn" href @click.prevent="emit('protip')">Pro Tip</a>
     <a class="small-btn" href="https://www.yahoo.com" target="_blank">
       Prizes & Odds
@@ -83,6 +84,9 @@ const chooseRules = (num) => {
   </div>
   <div v-if="(store.presentrules === null)" class="rules-select__container">
     <div class="rules-select__list">
+      <div class="rules-select__note">
+    <p>There are lots of ways to play pick three. Choose one of these most popular ways to learn how the game is played.</p>
+    </div>
       <a href @click.prevent="chooseRules(0)">Pick Different Numbers</a>
       <a
         v-if="(store.presentgame == 'exact')"
@@ -134,9 +138,6 @@ const chooseRules = (num) => {
     </div>
 
     <div class="bottom play">
-      <div class="play-note info-point">
-        <p>{{ store.gamerules[store.presentrules].gamenote }}</p>
-      </div>
       <a
         v-show="!store.picks.includes(null)"
         href
@@ -208,7 +209,7 @@ h2 {
 .bottom {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
 }

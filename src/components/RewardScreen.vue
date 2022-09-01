@@ -2,6 +2,9 @@
 import gsap from 'gsap';
 import { onMounted } from 'vue';
 import Logo from '../assets/pick-4-logo.png'
+import { gamesStore } from '@/store/GamesStore'
+
+const store = gamesStore();
 
 const jackpot = new Audio('../audio/sprite/jackpot.mp3');
 
@@ -31,7 +34,7 @@ onMounted(() => {
 <template>
 <div class="reward-wrapper">
 <div><h2 id="hl1">You won</h2></div>
-<div class="reward__amt"><h2 id="hl2">$180</h2></div>
+<div class="reward__amt"><h2 id="hl2">${{ store.prizemoney }}</h2></div>
 <div><h2 id="hl3">playing</h2></div>
 <div><img
           width="256"

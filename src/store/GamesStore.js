@@ -12,6 +12,7 @@ export const gamesStore = defineStore('games', {
         fireball: null,
         presentgame: null,
         presentrules: null,
+        prizemoney: 0,
         gamerules: [
             {
             id: 0,
@@ -65,7 +66,7 @@ export const gamesStore = defineStore('games', {
             this.presentrules = null
             this.presentgame = null
             this.showfireball = false
-
+            this.prizemoney = 0;
         },
         selectNum(num, slot) {
             this.picks[slot] = num
@@ -127,6 +128,18 @@ export const gamesStore = defineStore('games', {
         },
         setPresentRules(rules) {
             this.presentrules = rules
+                    //set prize money
+            if (this.presentgame === "exact") {
+                this.prizemoney = 1350;
+            } else if (this.presentgame === "any" && rules == 0) {
+                this.prizemoney = 56;
+            } else if (this.presentgame === "any" && rules == 2) {
+                this.prizemoney = 340;
+            } else if (this.presentgame === "fifty" && rules == 0) {
+                this.prizemoney = 28;
+            } else if (this.presentgame === "fifty" && rules == 2) {
+                this.prizemoney = 170;
+            }
         }
     }
 });
