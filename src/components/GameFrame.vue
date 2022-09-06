@@ -80,7 +80,7 @@ const chooseRules = (num) => {
   <div class="btn-row" v-if="(store.presentrules === null && store.gamerules)"></div>
   <div class="btn-row" v-else>
     <a class="small-btn" href @click.prevent="emit('protip')">Pro Tip</a>
-    <a class="small-btn" href="https://www.yahoo.com" target="_blank">
+    <a class="small-btn" href="https://nclottery.com/pick4-how-to-play" target="_blank">
       Prizes & Odds
     </a>
   </div>
