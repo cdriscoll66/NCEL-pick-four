@@ -25,13 +25,13 @@ onMounted(() => {
     });
 
     // fade in system
-    tl.to('#winning', {duration: .01, y: 50});
-    tl.to('#fireball__row', {duration: .01, y: 50});
     tl.to('#picks', {duration: .01, y: 50});
-    tl.to('#fireball', {duration: .5, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut'});
-    tl.to ('#winning', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
+    tl.to('#fireball__row', {duration: .01, y: 50});
+    tl.to('#winning', {duration: .01, y: 50});
+    // tl.to('#fireball', {duration: .5, scale: 1.1, yoyo: true, repeat: -1, ease: 'power1.inOut'});
+    tl.to ('#picks', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
     tl.to ('#fireball__row', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
-    tl.to ('#picks', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
+    tl.to ('#winning', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
 
     // circle numbers animation    
     tl.call(circleAnimation);
@@ -60,8 +60,9 @@ const circleAnimation = () => {
     tl1.to('#number-2', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-3 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
        // fireball cover last number
-    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
-    tl1.to('#fireball', {duration: 1, x:135, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
+    tl1.to('#fireball div span', { duration: 1, rotate: 135, ease: 'elastic.inOut' })
+    tl1.to('#fireball div span', { duration: 1, rotate: 0, delay: .5, ease: 'elastic.inOut' })
+    tl1.to('#fireball', {duration: 1, x:135, y:185, rotate: 0, delay: -.5,  ease: 'elastic.out'});
     tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-2 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
     }  else if (store.presentgame === 'exact')  {
@@ -72,8 +73,9 @@ const circleAnimation = () => {
     tl1.to('#number-2', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-2 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
        // fireball cover last number
-    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
-    tl1.to('#fireball', {duration: 1, x:135, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
+    tl1.to('#fireball div span', { duration: 1, rotate: 135, ease: 'elastic.inOut' })
+    tl1.to('#fireball div span', { duration: 1, rotate: 0, delay: .5, ease: 'elastic.inOut' })
+    tl1.to('#fireball', {duration: 1, x:135, y:185, rotate: 0, delay: -.5,  ease: 'elastic.out'});
     tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-3 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
     } else {
@@ -84,8 +86,9 @@ const circleAnimation = () => {
     tl1.to('#number-2', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-1 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
        // fireball cover last number
-    tl1.to('#fireball', {duration: 1, rotate: 30,  ease: 'elastic.inOut'});
-    tl1.to('#fireball', {duration: 1, x:135, y:-206.5, rotate: 0, delay: .5,  ease: 'elastic.out'});
+    tl1.to('#fireball div span', { duration: 1, rotate: 135, ease: 'elastic.inOut' })
+    tl1.to('#fireball div span', { duration: 1, rotate: 0, delay: .5, ease: 'elastic.inOut' })
+    tl1.to('#fireball', {duration: 1, x:135, y:185, rotate: 0, delay: -.5,  ease: 'elastic.out'});
     tl1.to('#fireball', {duration: 1, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-0 div', {duration: 1, backgroundColor: 'gold', color: 'black', delay: -1, ease: 'power1.inOut', onStart: () => {bubble()}});
 
@@ -116,6 +119,27 @@ const calcWinners = () => {
 
 <template>
   <div class="wrapper">
+
+    <div id="picks" class="picks__row">
+      <div class="title">
+        <h3><span>Your Numbers</span></h3>
+      </div>
+      <div class="picks">
+        <div v-for="(num, i) in store.picks" v-bind:id="'pick-' + i" class="number yours">
+          <div>{{ num }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="fireball__row" class="fireball__row">
+      <div class="title">
+        <img width="183" height="21" alt="Fireball" :src="Fireball" />
+      </div>
+      <div id="fireball" class="number fireball">
+        <div><span>{{ state.fireball }}</span></div>
+      </div>
+    </div>
+
     <div id="winning" class="winning-numbers__row">
       <div class="title">
         <h3>
@@ -131,24 +155,7 @@ const calcWinners = () => {
         </div>
       </div>
     </div>
-    <div id="fireball__row" class="fireball__row">
-      <div class="title">
-        <img width="183" height="21" alt="Fireball" :src="Fireball" />
-      </div>
-      <div id="fireball" class="number fireball">
-        <div>{{ state.fireball }}</div>
-      </div>
-    </div>
-    <div id="picks" class="picks__row">
-      <div class="title">
-        <h3><span>Your Numbers</span></h3>
-      </div>
-      <div class="picks">
-        <div v-for="(num, i) in store.picks" v-bind:id="'pick-' + i" class="number yours">
-          <div>{{ num }}</div>
-        </div>
-      </div>
-    </div>
+
   </div>
     <WinnerFlourish v-if="state.finalScreens === 1" />
     <RewardScreen v-else-if="state.finalScreens === 2" />
@@ -187,6 +194,7 @@ h3 span {
   flex-flow: column nowrap;
   align-items: center;
   margin-top: 20px;
+  z-index: 1;
 }
 
 .fireball__row .title {
@@ -231,6 +239,9 @@ h3 span {
   color: var(--vt-c-white);
 }
 
+.fireball div span {
+  font-weight: 700;
+}
 .yours div {
   background: none;
   border: 2px solid #ffd206;

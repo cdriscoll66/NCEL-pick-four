@@ -3,6 +3,8 @@ import { gamesStore } from '@/store/GamesStore'
 import PlayResults from '../components/PlayResults.vue'
 import GameBoard from '../components/GameBoard.vue'
 import Fireball from '../assets/fireball.png'
+import Logo from '../assets/pick-4-logo-blue.png'
+
 import { ClickSound } from '../composables/sfx';
 
 const emit = defineEmits(['music', 'musicplaypause', 'protip'])
@@ -83,9 +85,16 @@ const chooseRules = (num) => {
     </a>
   </div>
   <div v-if="(store.presentrules === null)" class="rules-select__container">
+    <div><img
+          width="256"
+          height="102"
+          id="logo"
+          alt="Pick 4 Plus Fireball logo"
+          :src="Logo"
+        /></div>
     <div class="rules-select__list">
-      <div class="rules-select__note">
-    <p>There are lots of ways to play pick three. Choose one of these most popular ways to learn how the game is played.</p>
+      <div class="playtype-select__note">
+    <p>There are lots of ways to play pick 4. Choose one of these most popular ways to learn how the game is played.</p>
     </div>
       <a href @click.prevent="chooseRules(0)">Pick Different Numbers</a>
       <a
@@ -93,10 +102,10 @@ const chooseRules = (num) => {
         href
         @click.prevent="chooseRules(1)"
       >
-        Pick all the Same number
+        Pick All the Same number
       </a>
       <a v-else href @click.prevent="chooseRules(2)">
-        Pick 3 of the same and one different
+        Pick 3 of the Same and 1 Different
       </a>
     </div>
   </div>
@@ -178,6 +187,7 @@ const chooseRules = (num) => {
   align-items: center;
 }
 
+
 .quick-pick a::before,
 .fireball__select a::before {
   content: '';
@@ -224,6 +234,13 @@ h2 {
 .play a.one-line {
   margin-top: 0;
   text-align: center;
+}
+
+.playtype-select__note {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: var(--vt-c-white);
+  font-size: 14px;
 }
 
 .fireball-pick {

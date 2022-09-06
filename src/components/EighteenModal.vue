@@ -24,7 +24,7 @@ const confirmation = () => {
     </a>
     </div>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    <p class="notice"> Game demos are for educational purposes only and do not represent actual odds of winning. Winning in this experience does not convey any prizes or cash value. There may be some variations between the demo game and the actual game. The North Carolina Education Pick 4 game play is subject to NCEL game rules. </p>    
     <BgStars />
   </div>
 </template>
@@ -77,6 +77,11 @@ h2 {
   line-height: 1.2;
   text-align: center;
   margin-bottom: 30px;
+}
+
+.notice a {
+  color: var(--color-text);
+  text-decoration: underline;
 }
 
 </style>

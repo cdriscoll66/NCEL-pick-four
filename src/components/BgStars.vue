@@ -97,7 +97,7 @@ const props = defineProps(['blue', 'gray'], {
   width: 100%;
   height: calc(100% + 161.67px);
   background: repeat 50% 0;
-  opacity: 0.35;
+  opacity: 0.65;
   mix-blend-mode: soft-light;
   animation: slide-down-stars 7s linear infinite;
   background-image: url(../assets/background-stars.svg);

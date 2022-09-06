@@ -24,12 +24,12 @@ onMounted(() => {
     });
 
     // fade in system
-    tl.to('#winning', {duration: .01, y: 50});
-    tl.to('#fireball__row', {duration: .01, y: 50});
     tl.to('#picks', {duration: .01, y: 50});
-    tl.to ('#winning', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
+    tl.to('#fireball__row', {duration: .01, y: 50});
+    tl.to('#winning', {duration: .01, y: 50});
+    tl.to ('#picks', {duration: .5, opacity: 1, y: 0, ease: 'power1.inOut'});
     tl.to ('#fireball__row', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
-    tl.to ('#picks', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
+    tl.to ('#winning', {duration: .5, opacity: 1, y: 0, delay: 1, ease: 'power1.inOut'});
 
     // circle numbers animation    
     tl.call(circleAnimation);
@@ -109,6 +109,27 @@ const calcWinners = () => {
 
 <template>
   <div class="wrapper">
+
+    <div id="picks" class="picks__row">
+      <div class="title">
+        <h3><span>Your Numbers</span></h3>
+      </div>
+      <div class="picks">
+        <div v-for="(num, i) in store.picks" v-bind:id="'pick-' + i" class="number yours">
+          <div>{{ num }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="fireball__row" class="fireball__row">
+      <div class="title">
+        <img width="183" height="21" alt="Fireball" :src="Fireball" />
+      </div>
+      <div id="fireball" class="number fireball">
+        <h3>You did not select <br /> to add Fireball</h3>
+      </div>
+    </div>
+
     <div id="winning" class="winning-numbers__row">
       <div class="title">
         <h3>
@@ -124,24 +145,9 @@ const calcWinners = () => {
         </div>
       </div>
     </div>
-    <div id="fireball__row" class="fireball__row">
-      <div class="title">
-        <img width="183" height="21" alt="Fireball" :src="Fireball" />
-      </div>
-      <div id="fireball" class="number fireball">
-        <h3>You did not select <br /> to add Fireball</h3>
-      </div>
-    </div>
-    <div id="picks" class="picks__row">
-      <div class="title">
-        <h3><span>Your Numbers</span></h3>
-      </div>
-      <div class="picks">
-        <div v-for="(num, i) in store.picks" v-bind:id="'pick-' + i" class="number yours">
-          <div>{{ num }}</div>
-        </div>
-      </div>
-    </div>
+
+
+
   </div>
     <BetterLuck v-if="state.finalScreens === 1" />
     <FinalScreen v-else-if="state.finalScreens === 2" />

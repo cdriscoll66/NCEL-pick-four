@@ -98,7 +98,7 @@ const Music = (song) => {
             <span class="top-left"></span>
             <span class="top-right"></span>
           </span>
-          <span>Play</span>
+          <span>Play Demo</span>
         </RouterLink>
         <a href @click.prevent="muteToggle()">
           <span class="nav-icon">
@@ -149,7 +149,7 @@ nav {
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: var(--color-gold);
 }
 
 nav a.router-link-exact-active:hover {

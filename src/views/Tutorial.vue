@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, onBeforeMount } from 'vue'
 
-import PlayBtn from '../assets/play.png'
+import PlayBtn from '../assets/play.svg'
 import PauseBtn from '../assets/pause.svg'
 import FwdBtn from '../assets/arrow-square-right.svg'
 import BackBtn from '../assets/arrow-square-left.svg'
@@ -204,19 +204,19 @@ const handleToc = (i) => {
     />
     <div class="video-controls">
       <a href @click.prevent="prevVideo">
-        <img width="26" height="26" alt="Back Icon" :src="BackBtn" />
+        <img width="22" height="22" alt="Back Icon" :src="BackBtn" />
         <span>Previous</span>
       </a>
       <a href v-if="state.playing" @click.prevent="Playpause">
-        <img width="26" height="26" alt="Pause Icon" :src="PauseBtn" />
+        <img width="22" height="22" alt="Pause Icon" :src="PauseBtn" />
         <span>Pause</span>
       </a>
       <a href v-else @click.prevent="Playpause">
-        <img width="26" height="26" alt="Play Icon" :src="PlayBtn" />
+        <img width="22" height="22" alt="Play Icon" :src="PlayBtn" />
         <span>Play</span>
       </a>
       <a href @click.prevent="nextVideo">
-        <img width="26" height="26" alt="Foward Icon" :src="FwdBtn" />
+        <img width="22" height="22" alt="Foward Icon" :src="FwdBtn" />
         <span>Next</span>
       </a>
     </div>
@@ -290,4 +290,12 @@ h1 {
   background-size: contain;
   background-position: center;
 }
+
+.video-controls a span{
+  font-family: 'Avenir Next', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: -.2px;
+}
+
 </style>

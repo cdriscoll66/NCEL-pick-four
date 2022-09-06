@@ -69,24 +69,20 @@ const onLeave = (path) => {
     <a id="tutbtn" href @click.prevent="onLeave('tutorial')" class="accent-button">
       <div id="tutbtntxt">
         <span class="button__title">Learn the Game</span>
-        <span class="button__subtitle">Take the tour</span>
+        <span class="button__subtitle">70-Second Tour</span>
       </div>
     </a>
 
     <a id="demobtn" href @click.prevent="onLeave('game')" class="accent-button">
       <div id="demobtntxt">
-        <span class="button__title">Try the Game</span>
-        <span class="button__subtitle">Play Demo</span>
+        <span class="button__title">Try Your Luck</span>
+        <span class="button__subtitle">Play Demo Game</span>
       </div>
     </a>
     <div class="home-warnings">
       <p id="sound-warning">This experience has sound</p>
       <p id="age-warning">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
+        MUST BE 18 TO PLAY. Odds to win a Pick 4 prize range from 1 in 100 to 1 in 1,000. Odds to win a Pick 3 Fireball prize range from 1 in 37 to 1 in 10,000.<br /> Problem Gambling Helpline: 877-718-5543
       </p>
     </div>
     <div class="transition-stars">
@@ -118,6 +114,7 @@ const onLeave = (path) => {
   line-height: 1.5;
   opacity: 0;
   transform: translateY(20px);
+  font-family: 'Avenir Next', sans-serif;
 }
 
 #tutbtn,

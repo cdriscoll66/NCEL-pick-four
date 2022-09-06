@@ -1,7 +1,7 @@
 <script setup>
 import gsap from 'gsap';
 import { onMounted } from 'vue';
-import Logo from '../assets/pick-4-logo.png'
+import Logo from '../assets/pick-4-logo-blue.png'
 import { gamesStore } from '@/store/GamesStore'
 
 const store = gamesStore();
@@ -40,7 +40,7 @@ onMounted(() => {
           width="256"
           height="102"
           id="logo"
-          alt="Pick 3 Plus Fireball logo"
+          alt="Pick 4 Plus Fireball logo"
           :src="Logo"
         /></div>
 
