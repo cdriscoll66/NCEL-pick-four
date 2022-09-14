@@ -135,11 +135,7 @@ export const gamesStore = defineStore('games', {
                 this.prizemoney = 56;
             } else if (this.presentgame === "any" && rules == 2) {
                 this.prizemoney = 340;
-            } else if (this.presentgame === "fifty" && rules == 0) {
-                this.prizemoney = 28;
-            } else if (this.presentgame === "fifty" && rules == 2) {
-                this.prizemoney = 170;
-            }
+            } 
         }
     }
 });

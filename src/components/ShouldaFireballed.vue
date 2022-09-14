@@ -47,7 +47,7 @@ const circleAnimation = () => {
         repeat: 0,
     });
   
-if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+if ((store.presentgame === 'any' ) && store.presentrules === 2) {
     tl1.to('#number-0', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
     tl1.to('#pick-0 div', {duration: 1.2, backgroundColor: 'gold', color: 'black', delay: -1.2, ease: 'power1.inOut', onStart: () => {bubble()}});  
     tl1.to('#number-1', {duration: 1.2, borderColor: 'gold', ease: 'power1.inOut'});
@@ -90,7 +90,7 @@ const bubble = () => {
 }
 
 const calcWinners = () => {
-  if ((store.presentgame === 'any' || 'fifty') && store.presentrules === 2) {
+  if ((store.presentgame === 'any') && store.presentrules === 2) {
     state.winners = [store.picks[0], store.picks[2], store.picks[3], store.fireball]
     state.fireball = store.picks[1]
   }
