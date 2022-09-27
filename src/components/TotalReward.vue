@@ -1,7 +1,7 @@
 <script setup>
     import gsap from 'gsap';
     import { onMounted, reactive, computed } from 'vue';
-    import Logo from '../assets/pick-4-logo.svg';
+    import Logo from '../assets/pick-4-logo.png';
     import { gamesStore } from '@/store/GamesStore'
     
     const store = gamesStore();

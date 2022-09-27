@@ -28,13 +28,12 @@ const props = defineProps(['tuts'])
   padding: 0 10px;
   position: absolute;
   z-index: 99999;
-  background-color: var(--color-blue-shade);
 }
 
 .progress-bar {
   width: 100%;
   height: 4px;
-  background-color: #809e8f;
+  background-color: var(--color-blue-shade);
   border-radius: 10px;
 }
 

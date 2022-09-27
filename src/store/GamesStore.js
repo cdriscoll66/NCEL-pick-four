@@ -171,15 +171,16 @@ export const gamesStore = defineStore("games", {
       this.playedany++;
     },
     setWinPercentage() {
-      if (this.presentgame === "exact" && this.playedexact == 0) {
-        this.winpercentage = 20;
-        this.playedexact++;
-      } else if (this.presentgame === "any" && this.playedany == 0) {
-        this.winpercentage = 20;
-        this.playedany++;
-      } else {
-        this.winpercentage = Math.floor(Math.random() * 100)
-      }
+      // if (this.presentgame === "exact" && this.playedexact == 0) {
+      //   this.winpercentage = 20;
+      //   this.playedexact++;
+      // } else if (this.presentgame === "any" && this.playedany == 0) {
+      //   this.winpercentage = 20;
+      //   this.playedany++;
+      // } else {
+      //   this.winpercentage = Math.floor(Math.random() * 100)
+      // }
+      this.winpercentage = 40;
     },
     genLoser() {
       let num = Math.floor(Math.random() * 10) + 1;
