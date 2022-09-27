@@ -9,6 +9,10 @@ import HiBluestar from '../assets/star-hiblue.svg';
 import Goldstar from '../assets/star-gold.svg';
 import { ClickSound } from '../composables/sfx';
 
+import { gamesStore } from '@/store/GamesStore'	
+
+const store = gamesStore();
+
 const router = useRouter();
 const route = useRoute();
 const sphere = ref(null);
@@ -24,10 +28,8 @@ onMounted(() => {
   loadInTL.to('#age-warning', { delay: 0, duration: 0.6, opacity: 1, y: 0 })
 });
 
-let click = new Audio('../audio/sprite/button_click.mp3');
-
 const onLeave = (path) => {
-  ClickSound();
+  if (!store.ismuted) {ClickSound()}	
   setTimeout (() => {
   if(path == 'tutorial') {
       emit('music', '/audio/3FunkShortVersion.mp3')
@@ -75,8 +77,8 @@ const onLeave = (path) => {
 
     <a id="demobtn" href @click.prevent="onLeave('game')" class="accent-button">
       <div id="demobtntxt">
-        <span class="button__title">Try Your Luck</span>
-        <span class="button__subtitle">Play Demo Game</span>
+        <span class="button__title">Try the Game</span>
+        <span class="button__subtitle">Play Demo</span>
       </div>
     </a>
     <div class="home-warnings">
@@ -95,10 +97,13 @@ const onLeave = (path) => {
 </template>
 
 <style scoped>
-
+.sphere {	
+  z-index: 1;	
+}
 .home-warnings {
   margin: 20px 30px 0;
   text-align: center;
+  z-index: 0;	
 }
 
 #sound-warning {
