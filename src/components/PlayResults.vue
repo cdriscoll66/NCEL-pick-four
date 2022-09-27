@@ -4,7 +4,6 @@ import { gamesStore } from '@/store/GamesStore'
 import BgStars from './BgStars.vue'
 import ConfirmScreen from './ConfirmNumbersScreen.vue'
 import Winner from './Winner.vue'
-import ShouldaFireballed from './ShouldaFireballed.vue'
 import { ClickSound } from '../composables/sfx'
 const store = gamesStore()
 
@@ -16,7 +15,9 @@ const state = reactive({
 
 
 const playRewardScreen = () => {
-  ClickSound()
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
   state.showConfirmScreen = false
 }
 
@@ -33,8 +34,7 @@ const playRewardScreen = () => {
           />
           </div>
           <div v-else class="winner-screen">
-            <Winner v-if="store.fireballselected" />
-            <ShouldaFireballed v-else/>
+            <Winner />
           </div> 
       <BgStars blue="true"/>
     </div>

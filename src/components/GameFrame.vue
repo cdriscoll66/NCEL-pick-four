@@ -7,13 +7,14 @@ import Logo from '../assets/pick-4-logo-blue.png'
 
 import { ClickSound } from '../composables/sfx';
 
-const emit = defineEmits(['music', 'musicplaypause', 'protip'])
+const emit = defineEmits(['music', 'musicplaypause', 'protip', 'prize'])
 
 const store = gamesStore()
 
 
 
 const numberSelection = (num, slot) => {
+  store.isNotQuickPick();	
   if (store.presentrules == 1) {
     store.setSame(num)
   } else if (store.presentrules == 2) {
@@ -31,8 +32,11 @@ const numberSelection = (num, slot) => {
 }
 
 const quickPick = () => {
+  store.isQuickPick();	
   // generate an array of 3 integers between 0 and 9 but they must be unique.
-  ClickSound()
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
   if (store.presentrules == 0) {
     store.randomNums()
   } else if (store.presentrules == 1) {
@@ -44,12 +48,16 @@ const quickPick = () => {
 }
 
 const queryFireball = () => {
-  ClickSound()
-  store.showFireball()
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
+    store.showFireball()
 }
 
 const playFireball = () => {
-  ClickSound()
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
   store.hideFireball()
   store.useFireball()
   store.genFireball()
@@ -57,7 +65,9 @@ const playFireball = () => {
 }
 
 const optOut = () => {
-  ClickSound()
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
   store.hideFireball()
   store.noFireball()
   store.genFireball()
@@ -71,7 +81,9 @@ const nextGame = () => {
 }
 
 const chooseRules = (num) => {
-  ClickSound();
+  if (!store.ismuted) {	
+    ClickSound()	
+  }
   store.setPresentRules(num)
 }
 </script>
@@ -80,8 +92,7 @@ const chooseRules = (num) => {
   <div class="btn-row" v-if="(store.presentrules === null && store.gamerules)"></div>
   <div class="btn-row" v-else>
     <a class="small-btn" href @click.prevent="emit('protip')">Pro Tip</a>
-    <a class="small-btn" href="https://nclottery.com/pick4-how-to-play" target="_blank">
-      Prizes & Odds
+    <a v-if="(store.presentgame === null)" class="small-btn" href @click.prevent="emit('prize')">	      Prizes & Odds
     </a>
   </div>
   <div v-if="(store.presentrules === null)" class="rules-select__container">
@@ -94,7 +105,7 @@ const chooseRules = (num) => {
         /></div>
     <div class="rules-select__list">
       <div class="playtype-select__note">
-    <p>There are lots of ways to play pick 4. Choose one of these most popular ways to learn how the game is played.</p>
+    <p>There are MANY of ways to play pick 4. Choose one of these most popular ways to learn how the game is played.</p>
     </div>
       <a href @click.prevent="chooseRules(0)">Pick Different Numbers</a>
       <a
@@ -102,10 +113,10 @@ const chooseRules = (num) => {
         href
         @click.prevent="chooseRules(1)"
       >
-        Pick All the Same number
+        Pick All the Same Number	
       </a>
       <a v-else href @click.prevent="chooseRules(2)">
-        Pick 3 of the Same and 1 Different
+        Pick Two of the Same Numbers and One Different	
       </a>
     </div>
   </div>
@@ -116,18 +127,22 @@ const chooseRules = (num) => {
         <span>Fireball?</span>
       </h2>
       <div class="fireball__select">
-        <a href @click.prevent="playFireball()">
+        <a href :class="{ checked: store.fbchecked }" @click.prevent="store.fbCheckedToggle()">
           <img width="183" height="21" alt="Fireball" :src="Fireball" />
         </a>
       </div>
       <div class="play-note info-point">
         <p>
-          With the Fireball, you can replace any number drawn by the lottery.
-          This gives you more combinations and more chances to win!
+          Fireball is an extra lottery-drawn number for more combinations to match and win. Adding Fireball doubles the cost of your ticket.	
         </p>
       </div>
 
-      <div class="fireball-pick__optout">
+      <div v-if="(store.fbchecked)" class="fireball-pick__button fireball-pick__optout">	
+        <a class="accent-button" href @click.prevent="playFireball">	
+          <div><span class="button-title">Next</span></div>	
+        </a>	
+      </div>	
+      <div v-else class="fireball-pick__button fireball-pick__optout">
         <a class="accent-button btn-gray" href @click.prevent="optOut">
           <div><span class="button-title">Not This Time</span></div>
         </a>
@@ -143,9 +158,7 @@ const chooseRules = (num) => {
     <GameBoard @select-num="numberSelection"></GameBoard>
 
     <div class="quick-pick">
-      <a href @click.prevent="quickPick">Quick Pick</a>
-    </div>
-
+      <a href :class="{ checked: store.isquickpick }" @click.prevent="quickPick">Quick Pick</a>    </div>
     <div class="bottom play">
       <a
         v-show="!store.picks.includes(null)"
@@ -153,7 +166,7 @@ const chooseRules = (num) => {
         class="accent-button one-line"
         @click.prevent="queryFireball()"
       >
-        <span class="button__title">Play!</span>
+        <span class="button__title">Next</span>
       </a>
     </div>
 
@@ -188,16 +201,18 @@ const chooseRules = (num) => {
 }
 
 
-.quick-pick a::before,
-.fireball__select a::before {
-  content: '';
-  display: block;
-  width: 30px;
-  height: 40px;
-  background-color: var(--vt-c-white);
-  border-radius: 3.94px;
-  border: 1px solid var(--color-fireball-red);
-  margin-right: 12px;
+.fireball__select a::before, .quick-pick a::before {	
+  content: '';	
+  display: block;	
+  width: 30px;	
+  height: 30px;	
+  background-image: url(../assets/blank-square.svg);	
+  background-repeat: no-repeat;	
+  background-size: contain;	
+  margin-right: 4px;	
+}	
+.quick-pick a.checked::before, .fireball__select a.checked::before {	
+  background-image: url(../assets/square-check.svg);	
 }
 
 h2 {
@@ -207,6 +222,13 @@ h2 {
   color: var(--vt-c-white);
   text-align: center;
   margin-top: 10px;
+}
+
+.playtype-select__note {	
+  margin-top: 30px;	
+  margin-bottom: 30px;	
+  color: var(--vt-c-white);	
+  font-size: 16px;	
 }
 
 .game h2 {
@@ -266,7 +288,7 @@ h2 {
 .fireball-pick__container h2{
   margin-bottom: 30px;
 }
-.fireball-pick__optout .btn-gray {
+.fireball-pick__button a {	
   font-size: 18px;
   line-height: 22px;
   letter-spacing: -0.35px;

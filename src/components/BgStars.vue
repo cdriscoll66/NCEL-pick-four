@@ -69,6 +69,12 @@ const props = defineProps(['blue', 'gray'], {
   background: linear-gradient(0, rgba(0, 45, 61, 0) 50%, rgba(0, 45, 61, 0.25) 65%, #002D3D 90%);
 }
 
+@media not all and (min-resolution:.001dpcm) { 	
+  .blue > .bg-stars__inner::after  {	
+  background: none;	
+    }	
+}
+
 .blue > .bg-stars__inner::before {
   position: absolute;
   top: 0;
@@ -109,6 +115,11 @@ const props = defineProps(['blue', 'gray'], {
 
 .blue.bg-stars__cover {
   background-color: #0093C7;
+}
+
+.green.bg-stars__cover {	
+  background-color: rgba(0, 61, 122);	
+  background: linear-gradient(180deg, rgba(0, 147, 199, 0.6) 0%, rgba(0, 45, 61, 0.6) 57.87%);
 }
 
 .gray .bg-stars__stars {

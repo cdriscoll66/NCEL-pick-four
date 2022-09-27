@@ -2,11 +2,9 @@
     import gsap from 'gsap';
     import { gamesStore } from '@/store/GamesStore';
     import { onMounted } from 'vue';
-    import Logo from '../assets/pick-4-logo-blue.png'
+    import Fireball from '../assets/fireball.png'
     
-    const store = gamesStore()
-    
-    const emit = defineEmits(['next-screen']);
+    const store = gamesStore();
     
     onMounted(() => {
         let tl = gsap.timeline({
@@ -33,20 +31,9 @@
     <template>
     <div class="reward-wrapper">
     <div><h2 id="hl1">You didn't win</h2></div>
-    <div><img
-              width="256"
-              height="102"
-              id="logo"
-              alt="Pick 4 Plus Fireball logo"
-              :src="Logo"
-            /></div>
+    <div><img id="logo" width="183" height="21" alt="Fireball" :src="Fireball" /></div>
     <div>
-        <a v-if="(store.fireballselected)" href @click.prevent="nextScreen(-1)" id="hl2" class="accent-button one-line">
-          <div>
-            <span class="button__title">Play Fireball Drawing</span>
-          </div>
-        </a>
-        <h2 v-else class="betterluck" id="hl2">Better Luck Next Time!</h2></div>
+        <h2 class="betterluck" id="hl2">Better Luck Next Time!</h2></div>
     
     
     </div>
@@ -77,7 +64,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-evenly;
-        background-color: rgba(0, 61, 31, .9);
+        background-color: rgba(0, 31, 61, .9);
         color: var(--vt-c-white);
         align-items: center;
         z-index: 100;
@@ -89,7 +76,7 @@
         font-size: 124.8px;
         letter-spacing: -1.7127px;
         text-transform: uppercase;
-        text-shadow: -1px 1px 4px rgba(0, 88, 120, 0.75);
+        text-shadow: -1px 1px 4px rgba(0, 31, 61, 0.75);
         color: var(--color-gold);
     
     }
