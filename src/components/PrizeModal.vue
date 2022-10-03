@@ -31,18 +31,28 @@
                     </tr>
                     <tr>
                       <td>Exact</td>
-                      <td>$500</td>
-                      <td>$180</td>
+                      <td>$5,000</td>
+                      <td>$1,350</td>
                     </tr>
                     <tr>
-                      <td>Any (3-way)</td>
-                      <td>$160</td>
-                      <td>$60</td>
+                      <td>Any (4-way)</td>
+                      <td>$1,200</td>
+                      <td>$340</td>
                     </tr>
                     <tr>
                       <td>Any (6-way)</td>
-                      <td>$80</td>
-                      <td>$30</td>
+                      <td>$800</td>
+                      <td>$224</td>
+                    </tr>
+                    <tr>
+                      <td>Any (12-way)</td>
+                      <td>$400</td>
+                      <td>$112</td>
+                    </tr>
+                    <tr>
+                      <td>Any (24-way)</td>
+                      <td>$200</td>
+                      <td>$56</td>
                     </tr>
                   </table>
     
@@ -58,18 +68,28 @@
                     </tr>
                     <tr>
                       <td>Exact</td>
-                      <td>1:1,000</td>
-                      <td>1:333</td>
+                      <td>1:10,000</td>
+                      <td>1:2,500</td>
                     </tr>
                     <tr>
-                      <td>Any (3-way)</td>
-                      <td>1:333</td>
-                      <td>1:111</td>
+                      <td>Any (4-way)</td>
+                      <td>1:2,500</td>
+                      <td>1:625</td>
                     </tr>
                     <tr>
                       <td>Any (6-way)</td>
-                      <td>1:167</td>
-                      <td>1:56</td>
+                      <td>1:1,667</td>
+                      <td>1:417</td>
+                    </tr>
+                    <tr>
+                      <td>Any (12-way)</td>
+                      <td>1:833</td>
+                      <td>1:208</td>
+                    </tr>
+                    <tr>
+                      <td>Any (24-way)</td>
+                      <td>1:417</td>
+                      <td>1:104</td>
                     </tr>
                   </table>
                   <p> The odds of winning Fireball vary by the unique numbers played. Visit Visit <a href="https://nclottery.com/Pick4-How-to-Play" target="_blank">nclottery.com/Pick4-How-to-Play</a> to see odds for additional Pick 4 play types.</p>
@@ -147,7 +167,7 @@
         th {
           text-align: left;
           padding: 8px;
-          background-color: var(--color-blue);
+          background-color: var(--color-blue-shade);
           color: var(--color-gold);
           font-weight: bold;
           vertical-align: center;

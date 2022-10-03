@@ -66,13 +66,13 @@ export const gamesStore = defineStore("games", {
     useFireball() {
       this.fireballselected = true;
       if (this.presentgame === "exact" && this.presentrules == 0) {
-        this.fireprizemoney = 180;
+        this.fireprizemoney = 1350;
       } else if (this.presentgame === "exact" && this.presentrules == 1) {
-        this.fireprizemoney = 540;      
+        this.fireprizemoney = 1350;      
       } else if (this.presentgame === "any" && this.presentrules == 0) {
-        this.fireprizemoney = 30;
+        this.fireprizemoney = 340;
       } else if (this.presentgame === "any" && this.presentrules == 2) {
-        this.fireprizemoney = 60;
+        this.fireprizemoney = 112;
       } 
     },
     noFireball() {
@@ -155,13 +155,13 @@ export const gamesStore = defineStore("games", {
       this.presentrules = rules;
       //set prize money
       if (this.presentgame === "exact" && rules == 0) {
-        this.prizemoney = 500;
+        this.prizemoney = 5000;
       } else if (this.presentgame === "exact" && rules == 1) {
-        this.prizemoney = 500;      
+        this.prizemoney = 5000;      
       } else if (this.presentgame === "any" && rules == 0) {
-        this.prizemoney = 80;
+        this.prizemoney = 1200;
       } else if (this.presentgame === "any" && rules == 2) {
-        this.prizemoney = 160;
+        this.prizemoney = 400;
       } 
     },
     exactIncrement() {
