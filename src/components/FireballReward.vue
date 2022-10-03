@@ -1,6 +1,6 @@
 <script setup>
     import gsap from 'gsap';
-    import { onMounted } from 'vue';
+    import { onMounted, computed } from 'vue';
     import Fireball from '../assets/fireball.png'
     import { gamesStore } from '@/store/GamesStore'
     import { Jackpot } from '../composables/sfx';
@@ -33,6 +33,13 @@
         // tl.to ('#next-btn', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
     
      });
+
+     const fireDollar = computed(() => {
+        let amt = store.fireprizemoney;
+        let commas = amt.toLocaleString("en-US");
+        commas = "$" + commas;
+        return commas;
+     });
     
      const nextScreen = (num) => {
         emit('next-screen', num);
@@ -43,7 +50,7 @@
     <template>
     <div class="reward-wrapper">
     <div><h2 id="hl1">You won</h2></div>
-    <div class="reward__amt"><h2 id="hl2">${{ store.fireprizemoney }}</h2></div>
+    <div class="reward__amt"><h2 id="hl2">{{ fireDollar }}</h2></div>
     <div><h2 id="hl3">playing</h2></div>
     <div><img id="logo" width="183" height="21" alt="Fireball" :src="Fireball" />
     </div>

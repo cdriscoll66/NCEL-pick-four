@@ -1,6 +1,6 @@
 <script setup>
     import gsap from 'gsap';
-    import { onMounted } from 'vue';
+    import { onMounted, computed } from 'vue';
     import Logo from '../assets/pick-4-logo-blue.png'
     import { gamesStore } from '@/store/GamesStore'
     import { Jackpot } from '../composables/sfx';
@@ -34,6 +34,13 @@
         tl.to ('#next-btn', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
     
      });
+
+     const prizeDollar = computed(() => {
+        let amt = store.prizemoney;
+        let commas = amt.toLocaleString("en-US");
+        commas = "$" + commas;
+        return commas;
+     });
     
      const nextScreen = (num) => {
         emit('next-screen', num);
@@ -44,7 +51,7 @@
     <template>
     <div class="reward-wrapper">
     <div><h2 id="hl1">You won</h2></div>
-    <div class="reward__amt"><h2 id="hl2">${{ store.prizemoney }}</h2></div>
+    <div class="reward__amt"><h2 id="hl2">{{ prizeDollar }}</h2></div>
     <div><h2 id="hl3">playing</h2></div>
     <div><img
               width="256"

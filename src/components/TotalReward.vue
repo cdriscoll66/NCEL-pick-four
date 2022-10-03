@@ -62,18 +62,39 @@
         tl.to ('#logo', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
         tl.to ('#hl2', {duration: 2, innerText: state.result, snap: "innerText", ease: 'power1.inOut'});
      });
+
+     const prizeDollar = computed(() => {
+        let amt = store.prizemoney;
+        let commas = amt.toLocaleString("en-US");
+        commas = "$" + commas;
+        return commas;
+     });
+
+     const fireDollar = computed(() => {
+        let amt = store.fireprizemoney;
+        let commas = amt.toLocaleString("en-US");
+        commas = "$" + commas;
+        return commas;
+     });
+
+     const totalDollar = computed(() => {
+        let amt = state.total;
+        let commas = amt.toLocaleString("en-US");
+        // commas = "$" + commas;
+        return commas;
+     });
     
     </script>
     
     <template>
     <div class="reward-wrapper">
         <div v-show="state.screen === 1" class="reward-screen-intro">
-            <h2 id="wonbase">You won<br /> <span>${{ store.prizemoney }}</span> <br />playing <br />base game</h2>
-            <h2 id="wonfire">and <span>${{ state.fireprizeamount }}</span><br /> playing Fireball</h2>
+            <h2 id="wonbase">You won<br /> <span>{{ prizeDollar }}</span> <br />playing <br />base game</h2>
+            <h2 id="wonfire">and <span>{{ fireDollar }}</span><br /> playing Fireball</h2>
         </div>
         <div v-show="state.screen === 2" class="reward-screen-intro">
             <div><h2 id="hl1">For a total <br />winnings of</h2></div>
-            <div class="reward__amt"><h2>$</h2><h2 id="hl2">{{state.total}}</h2></div>
+            <div class="reward__amt"><h2>$</h2><h2 id="hl2">{{totalDollar}}</h2></div>
             <div><h2 id="hl3">playing</h2></div>
             <div><img width="256" height="102" id="logo" alt="4 Plus Fireball logo" :src="Logo"/></div>
         </div>
