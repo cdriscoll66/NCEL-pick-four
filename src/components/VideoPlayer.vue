@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onUpdated } from 'vue';
 
-
 const emit = defineEmits(['update-time'])
 const props = defineProps(['onscreen', 'playing']);
 
@@ -36,11 +35,11 @@ const spitOut = () => {
 
 <style scoped>
 #vid {position: absolute;
-z-index: -1;
+z-index: 0;
 bottom: 0;
 left: 0;
 width: 100%;
-background-color: var(--color-blue-shade);
+background-color: transparent;
 }
 
 video::-webkit-media-controls {

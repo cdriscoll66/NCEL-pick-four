@@ -93,7 +93,9 @@ const props = defineProps(['blue', 'gray'], {
   width: 100%;
   height: 100%;
   content: '';
-  background: linear-gradient(0, rgba(50, 50, 50, 0) 50%, rgba(50, 50, 50, 0.25) 65%, rbg(50, 50, 50) 90%);
+  background: linear-gradient(180deg, rgba(0, 147, 199, 0.6) 0%, rgba(0, 45, 61, 0.6) 57.87%);
+  mix-blend-mode: lighten;
+  opacity: 1;
 }
 
 
@@ -124,10 +126,11 @@ const props = defineProps(['blue', 'gray'], {
 
 .gray .bg-stars__stars {
   background-image: url(../assets/background-stars--gray.svg);
+  mix-blend-mode: normal;
 }
 
 .gray.bg-stars__cover {
-  background-color: #a7a7a7;
-  background: linear-gradient(180deg, #a7a7a7 0%, #c7c7c7 57.87%);
+  background-color: #2a90bf;
+  background: linear-gradient(180deg, #2a90bf 0%, #2a90bf 30%, #297296 100%);
 }
 </style>
