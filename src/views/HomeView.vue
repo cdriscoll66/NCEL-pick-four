@@ -84,7 +84,7 @@ const onLeave = (path) => {
     <div class="home-warnings">
       <p id="sound-warning">This experience has sound</p>
       <p id="age-warning">
-        MUST BE 18 TO PLAY. Odds to win a Pick 4 prize range from 1 in 100 to 1 in 1,000. Odds to win a Pick 4 Fireball prize range from 1 in 37 to 1 in 10,000.<br /> Problem Gambling Helpline: 877-718-5543
+        MUST BE 18 TO PLAY. Odds to win a Pick 4 prize range from 1 in 100 to 1 in 10,000. Odds to win a Pick 4 Fireball prize range from 1 in 56 to 1 in 100,000.<br /> Problem Gambling Helpline: 877-718-5543
       </p>
     </div>
     <div class="transition-stars">
