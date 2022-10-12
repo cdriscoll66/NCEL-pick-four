@@ -56,7 +56,7 @@
                     </tr>
                   </table>
     
-                  <p> Fireball wins are separate and in addition to any Pick 4 base game wins. All prizes shown based on $1 Play. Visit <a href="https://nclottery.com/Pick4-How-to-Play" target="_blank">nclottery.com/Pick4-How-to-Play</a> a for a list of prizes for additional Pick 4 play types as well as $0.50 Play prizes across all play types. </p>
+                  <p> Fireball wins are separate and in addition to any Pick 4 base game wins. All prizes shown based on $1 Play. Visit <a href="https://nclottery.com/Pick4-How-to-Play" target="_blank">nclottery.com/Pick4-How-to-Play</a> for a list of prizes for additional Pick 4 play types as well as $0.50 Play prizes across all play types. </p>
     
                   <h3>Odds</h3>
     
@@ -68,31 +68,31 @@
                     </tr>
                     <tr>
                       <td>Exact</td>
-                      <td>1:10,000</td>
+                      <td>1:2,778</td>
                       <td>1:2,500</td>
                     </tr>
                     <tr>
                       <td>Any (4-way)</td>
-                      <td>1:2,500</td>
+                      <td>1:758</td>
                       <td>1:625</td>
                     </tr>
                     <tr>
                       <td>Any (6-way)</td>
-                      <td>1:1,667</td>
+                      <td>1:521</td>
                       <td>1:417</td>
                     </tr>
                     <tr>
                       <td>Any (12-way)</td>
-                      <td>1:833</td>
+                      <td>1:278</td>
                       <td>1:208</td>
                     </tr>
                     <tr>
                       <td>Any (24-way)</td>
-                      <td>1:417</td>
+                      <td>1:149</td>
                       <td>1:104</td>
                     </tr>
                   </table>
-                  <p> The odds of winning Fireball vary by the unique numbers played. Visit Visit <a href="https://nclottery.com/Pick4-How-to-Play" target="_blank">nclottery.com/Pick4-How-to-Play</a> to see odds for additional Pick 4 play types.</p>
+                  <p> The odds of winning Fireball vary by the unique numbers played. Visit <a href="https://nclottery.com/Pick4-How-to-Play" target="_blank">nclottery.com/Pick4-How-to-Play</a> to see odds for additional Pick 4 play types.</p>
     
     
               </div>
