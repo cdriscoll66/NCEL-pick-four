@@ -30,7 +30,11 @@
     })
     
     
-    
+    const addComma = () => {
+        let val = state.result;
+        let commaed = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('hl2').innerHTML = commaed;
+    }
     
     
     
@@ -60,7 +64,9 @@
         tl.to ('.reward__amt', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
         tl.to ('#hl3', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
         tl.to ('#logo', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
-        tl.to ('#hl2', {duration: 2, innerText: state.result, snap: "innerText", ease: 'power1.inOut'});
+        tl.to ('#hl2', {duration: 2, innerText: state.result, snap: "innerText", ease: 'power1.inOut', onComplete: () => {
+            addComma();
+        }});
      });
 
      const prizeDollar = computed(() => {
