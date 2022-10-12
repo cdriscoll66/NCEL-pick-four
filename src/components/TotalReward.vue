@@ -5,11 +5,7 @@
     import { gamesStore } from '@/store/GamesStore'
     
     const store = gamesStore();
-    
-    const totalwinnings = computed(() => {
-        let val = store.prizemoney + state.fireprizeamount;
-         return val;
-    })
+
     
     const fireprizeamount = computed(() => {
         let val = null;
@@ -20,20 +16,41 @@
             }
          return val;
     })
+
+    const prizeamount = computed(() => {
+        let val = null;
+        if (store.winpercentage > 75 || (store.winpercentage < 50 && store.winpercentage > 25)) {
+            val = 0
+        } else {
+            val = store.prizemoney 
+            }
+         return val;
+    })
+
+    const totalwinnings = computed(() => {
+        let val = state.prizeamount + state.fireprizeamount;
+         return val;
+    })
     
     const state = reactive({
         screen: 1,
-        total: store.prizemoney,
+        prizeamount: prizeamount,
         result: totalwinnings,
-        fireprizeamount: fireprizeamount,
-    
+        fireprizeamount: fireprizeamount
     })
     
     
-    const addComma = () => {
+    const addCommaTotal = () => {
         let val = state.result;
-        let commaed = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('hl2').innerHTML = commaed;
+        let commas = val.toLocaleString("en-US");
+        commas = "$" + commas;
+        document.getElementById('hl2').innerHTML = commas;
+    }
+    
+    const addComma = (num) => {
+        let commas = num.toLocaleString("en-US");
+        commas = "$" + commas;
+        return commas;
     }
     
     
@@ -65,42 +82,22 @@
         tl.to ('#hl3', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
         tl.to ('#logo', {duration: .3, opacity: 1, y: 0, ease: 'power1.inOut'});
         tl.to ('#hl2', {duration: 2, innerText: state.result, snap: "innerText", ease: 'power1.inOut', onComplete: () => {
-            addComma();
+            addCommaTotal();
         }});
      });
 
-     const prizeDollar = computed(() => {
-        let amt = store.prizemoney;
-        let commas = amt.toLocaleString("en-US");
-        commas = "$" + commas;
-        return commas;
-     });
-
-     const fireDollar = computed(() => {
-        let amt = store.fireprizemoney;
-        let commas = amt.toLocaleString("en-US");
-        commas = "$" + commas;
-        return commas;
-     });
-
-     const totalDollar = computed(() => {
-        let amt = state.total;
-        let commas = amt.toLocaleString("en-US");
-        // commas = "$" + commas;
-        return commas;
-     });
     
     </script>
     
     <template>
     <div class="reward-wrapper">
         <div v-show="state.screen === 1" class="reward-screen-intro">
-            <h2 id="wonbase">You won<br /> <span>{{ prizeDollar }}</span> <br />playing <br />base game</h2>
-            <h2 id="wonfire">and <span>{{ fireDollar }}</span><br /> playing Fireball</h2>
+            <h2 id="wonbase">You won<br /> <span>{{ addComma(state.prizeamount) }}</span> <br />playing <br />base game</h2>
+            <h2 id="wonfire">and <span>{{ addComma(state.fireprizeamount) }}</span><br /> playing Fireball</h2>
         </div>
         <div v-show="state.screen === 2" class="reward-screen-intro">
             <div><h2 id="hl1">For a total <br />winnings of</h2></div>
-            <div class="reward__amt"><h2>$</h2><h2 id="hl2">{{totalDollar}}</h2></div>
+            <div class="reward__amt"><h2 id="hl2">{{addComma(state.prizeamount)}}</h2></div>
             <div><h2 id="hl3">playing</h2></div>
             <div><img width="256" height="102" id="logo" alt="4 Plus Fireball logo" :src="Logo"/></div>
         </div>
