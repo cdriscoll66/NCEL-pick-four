@@ -68,11 +68,11 @@ export const gamesStore = defineStore("games", {
       if (this.presentgame === "exact" && this.presentrules == 0) {
         this.fireprizemoney = 1350;
       } else if (this.presentgame === "exact" && this.presentrules == 1) {
-        this.fireprizemoney = 1350;      
+        this.fireprizemoney = 5400;      
       } else if (this.presentgame === "any" && this.presentrules == 0) {
-        this.fireprizemoney = 340;
-      } else if (this.presentgame === "any" && this.presentrules == 2) {
         this.fireprizemoney = 112;
+      } else if (this.presentgame === "any" && this.presentrules == 2) {
+        this.fireprizemoney = 340;
       } 
     },
     noFireball() {
@@ -159,9 +159,9 @@ export const gamesStore = defineStore("games", {
       } else if (this.presentgame === "exact" && rules == 1) {
         this.prizemoney = 5000;      
       } else if (this.presentgame === "any" && rules == 0) {
-        this.prizemoney = 1200;
+        this.prizemoney = 200;
       } else if (this.presentgame === "any" && rules == 2) {
-        this.prizemoney = 400;
+        this.prizemoney = 1200;
       } 
     },
     exactIncrement() {
