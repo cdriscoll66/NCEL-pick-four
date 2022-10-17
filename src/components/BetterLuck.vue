@@ -40,13 +40,14 @@
               alt="Pick 4 Plus Fireball logo"
               :src="Logo"
             /></div>
-    <div>
-        <a v-if="(store.fireballselected)" href @click.prevent="nextScreen(-1)" id="hl2" class="accent-button one-line">
-          <div>
-            <span class="button__title">Play Fireball Drawing</span>
-          </div>
-        </a>
-        <h2 v-else class="betterluck" id="hl2">Better Luck Next Time!</h2></div>
+        <div>
+            <a v-if="(store.fireballselected)" href @click.prevent="nextScreen(-1)" id="hl2" class="accent-button one-line">
+            <div>
+                <span class="button__title">Play Fireball Drawing</span>
+            </div>
+            </a>
+            <h2 v-else class="betterluck" id="hl2">Better Luck Next Time!!!</h2>
+        </div>
     
     
     </div>
