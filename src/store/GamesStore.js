@@ -70,7 +70,7 @@ export const gamesStore = defineStore("games", {
       } else if (this.presentgame === "exact" && this.presentrules == 1) {
         this.fireprizemoney = 5400;      
       } else if (this.presentgame === "any" && this.presentrules == 0) {
-        this.fireprizemoney = 112;
+        this.fireprizemoney = 56;
       } else if (this.presentgame === "any" && this.presentrules == 2) {
         this.fireprizemoney = 340;
       } 
