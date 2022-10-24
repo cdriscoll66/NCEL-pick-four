@@ -132,7 +132,7 @@ export const gamesStore = defineStore("games", {
       };
       const randomArray = () => {
         const arr = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
           let num = random();
           while (arr.includes(num)) {
             num = random();
@@ -142,6 +142,7 @@ export const gamesStore = defineStore("games", {
         return arr;
       };
       let arr = randomArray();
+      arr.unshift(arr[0]);
       arr.unshift(arr[0]);
       this.picks = arr;
     },
@@ -180,7 +181,7 @@ export const gamesStore = defineStore("games", {
       } else {
         this.winpercentage = Math.floor(Math.random() * 100)
       }
-      // this.winpercentage = 52;
+      // this.winpercentage = 24;
     },
     genLoser() {
       let num = Math.floor(Math.random() * 10) + 1;

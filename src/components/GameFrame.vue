@@ -116,7 +116,7 @@ const chooseRules = (num) => {
         Pick All the Same Number	
       </a>
       <a v-else href @click.prevent="chooseRules(2)">
-        Pick Two of the Same Numbers and One Different	
+        Pick Three of the Same Numbers and One Different	
       </a>
     </div>
   </div>
@@ -158,7 +158,8 @@ const chooseRules = (num) => {
     <GameBoard @select-num="numberSelection"></GameBoard>
 
     <div class="quick-pick">
-      <a href :class="{ checked: store.isquickpick }" @click.prevent="quickPick">Quick Pick</a>    </div>
+      <a href :class="{ checked: store.isquickpick }" @click.prevent="quickPick">Quick Pick</a>
+    </div>
     <div class="bottom play">
       <a
         v-show="!store.picks.includes(null)"
