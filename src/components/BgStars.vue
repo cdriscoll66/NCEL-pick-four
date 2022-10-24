@@ -75,6 +75,13 @@ const props = defineProps(['blue', 'gray'], {
     }	
 }
 
+/* (Safari + MobileSafari >= 14.6) or (All MobileSafari versions) */
+@supports  (selector(:nth-child(1 of x))) or (-webkit-touch-callout: none) {
+  .blue > .bg-stars__inner::after  {	
+  background: none;	
+    }	
+}
+
 .blue > .bg-stars__inner::before {
   position: absolute;
   top: 0;
